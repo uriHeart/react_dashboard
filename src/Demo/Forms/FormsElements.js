@@ -1,9 +1,37 @@
 import React from 'react';
 import {Row, Col, Card, Form, Button, InputGroup, FormControl, DropdownButton, Dropdown} from 'react-bootstrap';
+import axios from 'axios';
 
 import Aux from "../../hoc/_Aux";
 
 class FormsElements extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            selectedFile: null,
+        }
+    }
+
+    handleFileInput(e){
+        this.setState({
+            selectedFile : e.target.files[0],
+        })
+    }
+
+    handlePost(){
+        console.log(this.state.selectedFile)
+
+        const formData = new FormData();
+        formData.append('file', this.state.selectedFile);
+        console.log(formData.getAll('file'))
+        return axios.post("http://localhost:8081/excel", formData).then(res => {
+            alert('성공')
+        }).catch(err => {
+            alert('실패')
+        })
+    }
+
+
 
     render() {
 
@@ -36,7 +64,8 @@ class FormsElements extends React.Component {
                                             <Form.Group controlId="formBasicChecbox">
                                                 <Form.Check type="checkbox" label="Check me out" />
                                             </Form.Group>
-                                            <Button variant="primary">
+                                            <input type="file" name="file" onChange={e => this.handleFileInput(e)}></input>
+                                            <Button onClick={this.handlePost()}>
                                                 Submit
                                             </Button>
                                         </Form>
