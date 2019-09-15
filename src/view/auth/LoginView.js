@@ -5,6 +5,7 @@ import http from '../../utils/HttpTemplate';
 import {NavLink} from 'react-router-dom';
 import {login} from "../../actions/Actions";
 import connect from 'react-redux/es/connect/connect';
+import JSEncrypt from 'jsencrypt';
 
 class LoginView extends Component {
 
@@ -16,10 +17,20 @@ class LoginView extends Component {
     }
   }
 
+  componentDidMount() {
+    http.get('/api/auth/key').then((res) => {
+      this.setState({
+        'rsaPublicKey': res.data.publicKey
+      })
+    });
+  }
+
   handleLogin = () => {
-    http.post('/api/login', {
+    const rsaEncrypt = new JSEncrypt();
+    rsaEncrypt.setPublicKey(this.state.rsaPublicKey);
+    http.post('/api/auth/login', {
       loginId: this.state.loginId,
-      password: this.state.password
+      password: rsaEncrypt.encrypt(this.state.password)
     }).then(res => {
       if (res.data === true) {
         this.props.loginDispatch();

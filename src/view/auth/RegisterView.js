@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Col, Form, FormGroup, Input} from 'reactstrap';
 import {Button, Card, Container, Row} from 'react-bootstrap';
 import http from '../../utils/HttpTemplate';
+import JSEncrypt from 'jsencrypt';
 
 class RegisterView extends Component {
 
@@ -13,10 +14,20 @@ class RegisterView extends Component {
     }
   }
 
+  componentDidMount() {
+    http.get('/api/auth/key').then((res) => {
+      this.setState({
+        'rsaPublicKey': res.data.publicKey
+      })
+    });
+  }
+
   handleRegisterUser = () => {
-    http.post('/api/seller-register', {
+    const rsaEncrypt = new JSEncrypt();
+    rsaEncrypt.setPublicKey(this.state.rsaPublicKey);
+    http.post('/api/auth/seller-register', {
       loginId: this.state.loginId,
-      password: this.state.password
+      password: rsaEncrypt.encrypt(this.state.password)
     }).then(res => {
       alert('login 화면으로 이동합니다.');
       this.props.history.push('/login')

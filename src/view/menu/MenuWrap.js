@@ -22,7 +22,7 @@ class MenuWrap extends Component {
         <ul className="list-group">
           <MenuItem path='/login' title={'sign in'} />
           <MenuItem path='/register' title={'sign up'} />
-          <MenuItem path='/menu1' title={'Menu1'} />
+          <MenuItem path='/main' title={'Main'} />
         </ul>
       </Drawer>
     );
