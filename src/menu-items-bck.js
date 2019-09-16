@@ -28,12 +28,6 @@ export default {
                     icon: 'feather icon-box',
                     children: [
                         {
-                            id: 'excelUp',
-                            title: '엑셀 업로드',
-                            type: 'item',
-                            url: '/excel-upload'
-                        },
-                        {
                             id: 'button',
                             title: 'Button',
                             type: 'item',

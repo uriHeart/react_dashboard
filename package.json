@@ -5,6 +5,7 @@
   "homepage": "/front",
   "dependencies": {
     "axios": "^0.19.0",
+    "axui-datagrid": "^0.14.8",
     "bootstrap": "^4.3.1",
     "font-awesome": "^4.7.0",
     "google-maps-react": "^2.0.2",
