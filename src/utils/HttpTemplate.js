@@ -1,7 +1,7 @@
 import ajax from 'axios'
 
 const defaultHost = 'localhost';
-const defaultUrl = 'http://' + defaultHost + ':10002';
+const defaultUrl = 'http://' + defaultHost + ':10002/api';
 const header = {
   'Content-Type': 'application/json;charset=UTF-8'
 };
