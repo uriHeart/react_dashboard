@@ -7,7 +7,7 @@ import Header from './view/menu/Header';
 
 import LoginView from './view/auth/LoginView';
 import RegisterView from './view/auth/RegisterView';
-import MainView from "./view/main/MainView";
+import Order from "./view/order";
 import {connect} from "react-redux";
 import {withCookies} from 'react-cookie';
 
@@ -24,7 +24,7 @@ class App extends Component {
               <Route path='//' component={LoginView}/>
               <Route path='/login' component={LoginView}/>
               <Route path='/register' component={RegisterView}/>
-              <Route path='/main' component={MainView}/>
+              <Route path='/order' component={Order}/>
             </Switch>
           </div>
         </div>

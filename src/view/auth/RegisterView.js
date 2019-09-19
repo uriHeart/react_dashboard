@@ -15,7 +15,7 @@ class RegisterView extends Component {
   }
 
   componentDidMount() {
-    http.get('/auth/key').then((res) => {
+    http.get('/api/auth/key').then((res) => {
       this.setState({
         'rsaPublicKey': res.data
       })
@@ -25,7 +25,7 @@ class RegisterView extends Component {
   handleRegisterUser = () => {
     const rsaEncrypt = new JSEncrypt();
     rsaEncrypt.setPublicKey(this.state.rsaPublicKey);
-    http.post('/auth/seller-register', {
+    http.post('/api/auth/seller-register', {
       loginId: this.state.loginId,
       password: rsaEncrypt.encrypt(this.state.password)
     }).then(res => {

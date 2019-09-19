@@ -18,7 +18,7 @@ class LoginView extends Component {
   }
 
   componentDidMount() {
-    http.get('/auth/key').then((res) => {
+    http.get('/api/auth/key').then((res) => {
       this.setState({
         'rsaPublicKey': res.data
       })
@@ -28,7 +28,7 @@ class LoginView extends Component {
   handleLogin = () => {
     const rsaEncrypt = new JSEncrypt();
     rsaEncrypt.setPublicKey(this.state.rsaPublicKey);
-    http.post('/auth/login', {
+    http.post('/api/auth/login', {
       loginId: this.state.loginId,
       password: rsaEncrypt.encrypt(this.state.password)
     }).then(res => {

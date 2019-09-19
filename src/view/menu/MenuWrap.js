@@ -20,9 +20,9 @@ class MenuWrap extends Component {
         boxShadow: '0 0.5rem 1rem rgba(0,0,0,.05), inset 0 -1px 0 rgba(0,0,0,.1)'
       }} overlayColor={''} noTouchOpen={true} open={this.props.isOpen} onChange={this.change}>
         <ul className="list-group">
+          <MenuItem path='/order' title={'Order'} />
           <MenuItem path='/login' title={'sign in'} />
           <MenuItem path='/register' title={'sign up'} />
-          <MenuItem path='/main' title={'Main'} />
         </ul>
       </Drawer>
     );

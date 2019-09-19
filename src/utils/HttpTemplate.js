@@ -1,7 +1,7 @@
 import ajax from 'axios'
 
 const defaultHost = 'localhost';
-const defaultUrl = 'http://' + defaultHost + ':10002/api';
+const defaultUrl = 'http://' + defaultHost + ':10002';
 const header = {
   'Content-Type': 'application/json;charset=UTF-8'
 };
@@ -20,10 +20,7 @@ const http = {
     }).then(res => {
       return res;
     }).catch((error) => {
-      console.log(JSON.stringify(error));
-      if (error.response.data.status === 403) {
-        window.location.href = '/login';
-      }
+      http.notAuth(error);
     });
   },
   post: (path, body) => {
