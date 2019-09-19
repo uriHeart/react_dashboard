@@ -3,114 +3,113 @@ import {
     Row,
     Col,
     Button,
-    Card,
-    OverlayTrigger,
-    Tooltip,
-    Table
+    Form
 } from 'react-bootstrap';
 
 import Aux from "../hoc/_Aux";
 import Mcard from "../App/components/MainCard";
 import axios from "axios";
-import BasicGrid from "./excelUp_bck";
+import BasicGrid from "./ExcelListGrid";
 
 class ExcelUpload extends React.Component {
-    state = {
-        selectedFile: null,
-        fileInput : React.createRef(),
-        gridData:[]
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedFile: null,
+            channels:[{"name":"1","id":"dd"},{"name":"2","id":"dd1"}]
+        }
+
+        this.fileEvent = React.createRef();
+        this.channel = React.createRef();
+    }
+
+
+    componentDidMount() {
+        this.excelLIst()
     }
 
 
     handleFileInput(e){
-        console.log("dddddddddd")
         this.setState({
-            selectedFile : e.target.files[0],
+            selectedFile : e.target.files[0]
         })
     }
 
     handlePost = () => {
-        this.setState({gridData :[{"a":"22"}]})
-        console.log(this);
 
+        //console.log(this.channel.current.value)
+
+        if(this.state.selectedFile == null){
+            alert("파일을 선택해 주세요.")
+            return ;
+        }
+
+        const formData = new FormData();
+        formData.append('file', this.state.selectedFile);
+        formData.append('channelId', "1");
+        formData.append('vendorId', "1");
+
+        console.log(formData.getAll('file'))
+
+
+        axios.post("http://localhost:10001/excelUpload", formData).then(res => {
+            console.log(res.data)
+            this.setState({gridData:res.data,selectedFile:null})
+            this.fileEvent.current.value =null;
+            this.excelLIst()
+
+        }).catch(err => {
+            console.log(err)
+        })
     };
 
-    handlePost1(){
-        console.log(this);
+    excelLIst =() =>{
 
-        // console.log(this.selectedFile)
-        //
-        // const formData = new FormData();
-        // formData.append('file', this.state.selectedFile);
-        // formData.append('channelId', "1");
-        //
-        // formData.append('vendorId', "1");
-        //
-        // console.log(formData.getAll('file'))
-        // return axios.post("http://localhost:10001/excelUpload", formData).then(res => {
-        //     alert('성공')
-        // }).catch(err => {
-        //     alert('실패')
-        // })
+        axios.get("http://localhost:10001/excel/list").then(res => {
+            this.setState({gridData:res.data})
+        }).catch(err => {
+            console.log(err)
+        })
     }
 
+
     render() {
-        const buttonVariants = [
-            'primary',
-            'secondary',
-            'success',
-            'danger',
-            'warning',
-            'info',
-            'light',
-            'dark',
-        ];
-
-        const buttonOptions = [
-            {variant: 'primary', icon:'feather icon-thumbs-up'},
-            {variant: 'secondary', icon:'feather icon-camera'},
-            {variant: 'success', icon:'feather icon-check-circle'},
-            {variant: 'danger', icon:'feather icon-slash'},
-            {variant: 'warning', icon:'feather icon-alert-triangle'},
-            {variant: 'info', icon:'feather icon-info'}
-        ];
-
         return (
             <Aux>
                 <Row>
                     <Col>
                         <Mcard title="파일등록">
-                            <input type="file" name="file" className="btn btn-primary"
-                                   onChange={ event => this.handleFileInput(event)}></input>
-                            <Button onClick={this.handlePost}>
-                                등록
-                            </Button>
-                            <p>use <code>variant="*"</code> props in component <code>Button</code> to get various button</p>
-
+                            <Form.Group>
+                                <Col md={3}>
+                                    <Form.Label>select channel</Form.Label>
+                                    <Form.Control as="select" ref={this.channel}>
+                                        {
+                                         this.state.channels.map(function (channel) {
+                                                return <option  key={channel.id} value={channel.id}>{channel.name}</option>
+                                          })
+                                        }
+                                    </Form.Control>
+                                </Col>
+                            </Form.Group>
+                            <Form.Group>
+                                <Col md={5}>
+                                    <input type="file" name="file" className="btn btn-primary" ref={this.fileEvent}
+                                           onChange={ event => this.handleFileInput(event)}></input>
+                                    <Button onClick={this.handlePost}>
+                                        등록
+                                    </Button>
+                                </Col>
+                            </Form.Group>
                         </Mcard>
-                        <Card>
+                        <Mcard title="등록파일 리스트">
                                <BasicGrid
-                                   outW={300}
                                    gridData={this.state.gridData}
                                >
                                </BasicGrid>
-                        </Card>
+                        </Mcard>
                     </Col>
                 </Row>
-                {/*<Row>*/}
-                {/*    <Col>*/}
-                {/*        <Card title="Basic Dropdown Button">*/}
-                {/*            <ButtonToolbar>*/}
-                {/*                {basicDropdownButton}*/}
-                {/*            </ButtonToolbar>*/}
-                {/*        </Card>*/}
-                {/*        <Card title="Split Dropdown Button">*/}
-                {/*            <ButtonToolbar>*/}
-                {/*                {splitDropdownButton}*/}
-                {/*            </ButtonToolbar>*/}
-                {/*        </Card>*/}
-                {/*    </Col>*/}
-                {/*</Row>*/}
             </Aux>
         );
     }
