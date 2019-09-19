@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import ExcelDetailGrid from "./excel/ExcelDetailGrid";
 
 window.jQuery = $;
 window.$ = $;
@@ -42,6 +43,7 @@ const routes = [
     { path: '/sample-page', exact: true, name: 'Sample Page', component: OtherSamplePage },
     { path: '/docs', exact: true, name: 'Documentation', component: OtherDocs },
     { path: '/excel-upload', exact: true, name: 'excel upload', component: ExcelUpload },
+    { path: '/excel/detail:indexId', exact: true, name: 'excel detail', component: ExcelDetailGrid },
 
 ];
 
