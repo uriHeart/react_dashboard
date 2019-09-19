@@ -55,8 +55,8 @@ class ExcelUpload extends React.Component {
 
         axios.post("http://localhost:10001/excelUpload", formData).then(res => {
             console.log(res.data)
-            this.setState({gridData:res.data,selectedFile:null})
-            this.fileEvent.current.value =null;
+            this.setState({gridData:res.data,selectedFile : null})
+            this.fileEvent.current.value = null;
             this.excelLIst()
 
         }).catch(err => {
