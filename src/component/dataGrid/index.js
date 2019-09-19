@@ -13,12 +13,40 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    http.post(this.props.url, this.props.param)
-      .then(res => {
-        this.setState({
-          row: res.data
-        })
+    // http.post(this.props.url, this.props.param)
+    //   .then(res => {
+    //     this.setState({
+    //       row: res.data
+    //     })
+    //   }).catch(err => {
+      this.setState({
+        row: [{
+          vendor: {
+            vendorName: 'nike'
+          },
+          orderProduct: {
+            productName: '최신 신발',
+            productPrice: {
+              salesPrice: 10000
+            }
+          },
+          collectedAt: new Date().getTime(),
+          orderedAt: new Date().getTime()
+        }, {
+          vendor: {
+            vendorName: 'nike'
+          },
+          orderProduct: {
+            productName: '올드 신발',
+            productPrice: {
+              salesPrice: 5000
+            }
+          },
+          collectedAt: new Date().getTime(),
+          orderedAt: new Date().getTime()
+        }]
       });
+    // });
   }
 
   render() {
@@ -35,6 +63,9 @@ class Main extends Component {
             if (key.includes('.')) {
               let currentProject = project[splitKey[0]];
               for (let i = 1; i < splitKey.length; i++) {
+                if (currentProject[splitKey[i]] === undefined) {
+                  return '';
+                }
                 currentProject = currentProject[splitKey[i]]
               }
               return currentProject;

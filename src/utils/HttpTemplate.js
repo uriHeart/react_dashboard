@@ -20,7 +20,7 @@ const http = {
     }).then(res => {
       return res;
     }).catch((error) => {
-      http.notAuth(error);
+      // http.notAuth(error);
     });
   },
   post: (path, body) => {
@@ -30,7 +30,7 @@ const http = {
     }).then((res) => {
       return res;
     }).catch(error => {
-      http.notAuth(error);
+      // http.notAuth(error);
     });
   },
   put: (path, body) => {
@@ -40,7 +40,7 @@ const http = {
     }).then((res) => {
       return res;
     }).catch(error => {
-      http.notAuth(error);
+      // http.notAuth(error);
     });
   }
 };
