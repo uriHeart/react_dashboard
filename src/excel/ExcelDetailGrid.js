@@ -3,12 +3,10 @@ import * as React from 'react';
 import 'axui-datagrid/style.scss'; // or style.css
 import { DataGrid } from 'axui-datagrid';
 import windowSize from "react-window-size";
-import { withRouter } from 'react-router-dom'
 
 import axios from "axios";
 
 interface IProps {
-
 }
 interface IState {
     gridData: any[];
@@ -28,21 +26,20 @@ class ExcelDetailGrid extends React.Component<IProps, IState> {
         console.log(indexId )
 
         axios.get("http://localhost:10001/excel/detail?indexId="+indexId ).then(res => {
-            console.log(res.data)
+            console.log(res.data[0])
             let columns =[];
             let gridData = [];
 
-            res.data.forEach(function(sheet){
-                sheet.sheetHeader.forEach(function(header){
+            res.data[0].sheetHeader.forEach(function(header){
                     columns.push({
                         key: header,
                         label: header,
                         width: 200,
                         align: 'center',
                     })
-                })
-                gridData = sheet.sheetData
-            })
+            });
+            gridData = res.data[0].sheetData;
+
 
             this.setState({
                 columns : columns,
@@ -64,8 +61,8 @@ class ExcelDetailGrid extends React.Component<IProps, IState> {
         return (
             <>
                 <DataGrid
-                    width ={800}
-                    height={300}
+                    width ={this.props.windowWidth-300}
+                    height={this.props.windowHeight-300}
                     data={gridData}
                     columns={columns}
                     options={{

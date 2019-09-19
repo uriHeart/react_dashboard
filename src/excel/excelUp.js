@@ -17,7 +17,7 @@ class ExcelUpload extends React.Component {
         super(props);
         this.state = {
             selectedFile: null,
-            channels:[{"name":"1","id":"dd"},{"name":"2","id":"dd1"}]
+            channels:[{"name":"플레이어","id":"1"},{"name":"이지어드민","id":"2"}]
         }
 
         this.fileEvent = React.createRef();
