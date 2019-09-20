@@ -10,6 +10,7 @@ import Aux from "../hoc/_Aux";
 import Mcard from "../App/components/MainCard";
 import axios from "axios";
 import BasicGrid from "./ExcelListGrid";
+import { withRouter } from 'react-router-dom'
 
 class ExcelUpload extends React.Component {
 
@@ -55,10 +56,11 @@ class ExcelUpload extends React.Component {
 
         axios.post("http://localhost:10001/excelUpload", formData).then(res => {
             console.log(res.data)
-            this.setState({gridData:res.data,selectedFile : null})
+            this.setState({selectedFile : null})
             this.fileEvent.current.value = null;
-            this.excelLIst()
-
+            setInterval(()=>{
+                this.excelLIst()
+            },1000)
         }).catch(err => {
             console.log(err)
         })
@@ -115,4 +117,4 @@ class ExcelUpload extends React.Component {
     }
 }
 
-export default ExcelUpload;
+export default withRouter(ExcelUpload);
