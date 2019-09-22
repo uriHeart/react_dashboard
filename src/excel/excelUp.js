@@ -56,25 +56,14 @@ class ExcelUpload extends React.Component {
 
         axios.post("http://localhost:10001/excelUpload", formData).then(res => {
             console.log(res.data)
-            this.setState({gridData:res.data,selectedFile : null})
+            this.setState({selectedFile : null})
             this.fileEvent.current.value = null;
-
-            setTimeout(function(){
-
+            setInterval(()=>{
                 this.excelLIst()
-
-
-
-                console.log(this)
-            },2000)
-
+            },1000)
         }).catch(err => {
             console.log(err)
         })
-
-        // setTimeout(function(){
-        //  console.log(this)
-        // },1000)
     };
 
     excelLIst = () =>{
@@ -107,7 +96,7 @@ class ExcelUpload extends React.Component {
                                     <Form.Control as="select" ref={this.channel}>
                                         {
                                          this.state.channels.map(function (channel) {
-                                                return <option  key={channel.salesChannelId} value={channel.salesChannelId}>{channel.name}</option>
+                                                return <option  key={channel.id} value={channel.id}>{channel.name}</option>
                                           })
                                         }
                                     </Form.Control>
