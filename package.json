@@ -31,8 +31,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && xcopy \"C:/project/react_dashboard_frontend/build\" \"C:/project/webfront/src/main/resources/front\" /s /y /i",
-    "postbuild": "move C:\\project\\webfront\\src\\main\\resources\\front\\index.html C:\\project\\webfront\\src\\main\\resources\\templates",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
