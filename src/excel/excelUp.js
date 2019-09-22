@@ -17,7 +17,7 @@ class ExcelUpload extends React.Component {
         super(props);
         this.state = {
             selectedFile: null,
-            channels:[{"name":"플레이어","id":"1"},{"name":"이지어드민","id":"2"}]
+            channels:[]
         }
 
         this.fileEvent = React.createRef();
@@ -27,6 +27,7 @@ class ExcelUpload extends React.Component {
 
     componentDidMount() {
         this.excelLIst()
+        this.channelLIst()
     }
 
 
@@ -57,14 +58,26 @@ class ExcelUpload extends React.Component {
             console.log(res.data)
             this.setState({gridData:res.data,selectedFile : null})
             this.fileEvent.current.value = null;
-            this.excelLIst()
+
+            setTimeout(function(){
+
+                this.excelLIst()
+
+
+
+                console.log(this)
+            },2000)
 
         }).catch(err => {
             console.log(err)
         })
+
+        // setTimeout(function(){
+        //  console.log(this)
+        // },1000)
     };
 
-    excelLIst =() =>{
+    excelLIst = () =>{
 
         axios.get("http://localhost:10001/excel/list").then(res => {
             this.setState({gridData:res.data})
@@ -73,6 +86,14 @@ class ExcelUpload extends React.Component {
         })
     }
 
+    channelLIst = () =>{
+
+        axios.get("http://localhost:10001/channels").then(res => {
+            this.setState({channels:res.data})
+        }).catch(err => {
+            console.log(err)
+        })
+    }
 
     render() {
         return (
@@ -86,7 +107,7 @@ class ExcelUpload extends React.Component {
                                     <Form.Control as="select" ref={this.channel}>
                                         {
                                          this.state.channels.map(function (channel) {
-                                                return <option  key={channel.id} value={channel.id}>{channel.name}</option>
+                                                return <option  key={channel.salesChannelId} value={channel.salesChannelId}>{channel.name}</option>
                                           })
                                         }
                                     </Form.Control>
