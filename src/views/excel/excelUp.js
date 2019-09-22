@@ -6,8 +6,8 @@ import {
     Form
 } from 'react-bootstrap';
 
-import Aux from "../hoc/_Aux";
-import Mcard from "../App/components/MainCard";
+import Aux from "../../hoc/_Aux";
+import Mcard from "../../App/components/MainCard";
 import axios from "axios";
 import BasicGrid from "./ExcelListGrid";
 

@@ -4,9 +4,53 @@ import {NavLink} from 'react-router-dom';
 import './../../../assets/scss/style.scss';
 import Aux from "../../../hoc/_Aux";
 import Breadcrumb from "../../../App/layout/AdminLayout/Breadcrumb";
-import DEMO from "../../../store/constant";
+import http from '../../../App/components/HttpTemplate'
+import JSEncrypt from 'jsencrypt';
 
 class SignUp1 extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            loginId: '',
+            password: ''
+        }
+    }
+
+    componentDidMount() {
+        http.get('/api/auth/key').then((res) => {
+            this.setState({
+                'rsaPublicKey': res.data
+            })
+        });
+    }
+
+    handleRegisterUser = () => {
+        const rsaEncrypt = new JSEncrypt();
+        rsaEncrypt.setPublicKey(this.state.rsaPublicKey);
+        http.post('/api/auth/seller-register', {
+            loginId: this.state.loginId,
+            password: rsaEncrypt.encrypt(this.state.password)
+        }).then(res => {
+            alert('login 화면으로 이동합니다.');
+            this.props.history.push('/auth/signin-1')
+        }).catch(error => {
+            alert(error.response.data.message);
+        });
+    };
+
+    changeInputId = (event) => {
+        this.setState({
+            loginId: event.target.value
+        })
+    };
+
+    changeInputPassword = (event) => {
+        this.setState({
+            password: event.target.value
+        })
+    };
+
     render () {
         return(
             <Aux>
@@ -26,21 +70,15 @@ class SignUp1 extends React.Component {
                                 </div>
                                 <h3 className="mb-4">Sign up</h3>
                                 <div className="input-group mb-3">
-                                    <input type="text" className="form-control" placeholder="Username"/>
+                                    <input type="text" className="form-control" placeholder="Username" onChange={this.changeInputId}/>
                                 </div>
                                 <div className="input-group mb-3">
                                     <input type="email" className="form-control" placeholder="Email"/>
                                 </div>
                                 <div className="input-group mb-4">
-                                    <input type="password" className="form-control" placeholder="password"/>
+                                    <input type="password" className="form-control" placeholder="password" onChange={this.changeInputPassword}/>
                                 </div>
-                                <div className="form-group text-left">
-                                    <div className="checkbox checkbox-fill d-inline">
-                                        <input type="checkbox" name="checkbox-fill-2" id="checkbox-fill-2"/>
-                                            <label htmlFor="checkbox-fill-2" className="cr">Send me the <a href={DEMO.BLANK_LINK}> Newsletter</a> weekly.</label>
-                                    </div>
-                                </div>
-                                <button className="btn btn-primary shadow-2 mb-4">Sign up</button>
+                                <button className="btn btn-primary shadow-2 mb-4" onClick={this.handleRegisterUser}>Sign up</button>
                                 <p className="mb-0 text-muted">Allready have an account? <NavLink to="/auth/signin-1">Login</NavLink></p>
                             </div>
                         </div>
