@@ -6,9 +6,9 @@ import {
     Form
 } from 'react-bootstrap';
 
-import Aux from "../hoc/_Aux";
-import Mcard from "../App/components/MainCard";
-import axios from "axios";
+import Aux from "../../hoc/_Aux";
+import Mcard from "../../App/components/MainCard";
+import http from '../../App/components/HttpTemplate';
 import BasicGrid from "./ExcelListGrid";
 
 class ExcelUpload extends React.Component {
@@ -54,7 +54,7 @@ class ExcelUpload extends React.Component {
         console.log(formData.getAll('file'))
 
 
-        axios.post("http://localhost:10001/excelUpload", formData).then(res => {
+        http.post("/excelUpload", formData).then(res => {
             console.log(res.data)
             this.setState({selectedFile : null})
             this.fileEvent.current.value = null;
@@ -68,7 +68,7 @@ class ExcelUpload extends React.Component {
 
     excelLIst = () =>{
 
-        axios.get("http://localhost:10001/excel/list").then(res => {
+        http.get("/excel/list").then(res => {
             this.setState({gridData:res.data})
         }).catch(err => {
             console.log(err)
@@ -77,7 +77,7 @@ class ExcelUpload extends React.Component {
 
     channelLIst = () =>{
 
-        axios.get("http://localhost:10001/channels").then(res => {
+        http.get("/channels").then(res => {
             this.setState({channels:res.data})
         }).catch(err => {
             console.log(err)
