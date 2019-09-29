@@ -48,6 +48,12 @@ export default {
                     type: 'item',
                     url: '/excel-upload',
                     icon: 'feather icon-file-text'
+                }, {
+                    id: 'order',
+                    title: '주문 조회',
+                    type: 'item',
+                    url: '/order',
+                    icon: 'feather icon-file-text'
                 }
             ]
         }

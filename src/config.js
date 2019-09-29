@@ -1,4 +1,5 @@
 export default {
+    baseUrl:'http://localhost:10001',
     defaultPath: '/excel-upload',
     basename: '', // only at build time to set, like /datta-able
     layout: 'vertical', // vertical, horizontal (not available in lite version)

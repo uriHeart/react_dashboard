@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-import ExcelDetailGrid from "./excel/ExcelDetailGrid";
+import ExcelDetailGrid from "./views/excel/ExcelDetailGrid";
 
 window.jQuery = $;
 window.$ = $;
@@ -26,7 +26,8 @@ const GoogleMap = React.lazy(() => import('./Demo/Maps/GoogleMap/index'));
 
 const OtherSamplePage = React.lazy(() => import('./Demo/Other/SamplePage'));
 const OtherDocs = React.lazy(() => import('./Demo/Other/Docs'));
-const ExcelUpload = React.lazy(() => import('./excel/excelUp'));
+const ExcelUpload = React.lazy(() => import('./views/excel/excelUp'));
+const Order = React.lazy(() => import('./views/order'));
 
 const routes = [
     { path: '/dashboard/default', exact: true, name: 'Default', component: DashboardDefault },
@@ -43,6 +44,7 @@ const routes = [
     { path: '/sample-page', exact: true, name: 'Sample Page', component: OtherSamplePage },
     { path: '/docs', exact: true, name: 'Documentation', component: OtherDocs },
     { path: '/excel-upload', exact: true, name: 'excel upload', component: ExcelUpload },
+    { path: '/order', exact: true, name: 'order', component: Order },
     { path: '/excel/detail:indexId', exact: true, name: 'excel detail', component: ExcelDetailGrid },
 
 ];

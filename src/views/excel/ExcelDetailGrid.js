@@ -4,7 +4,7 @@ import 'axui-datagrid/style.scss'; // or style.css
 import { DataGrid } from 'axui-datagrid';
 import windowSize from "react-window-size";
 
-import axios from "axios";
+import http from '../../App/components/HttpTemplate';
 
 interface IProps {
 }
@@ -25,7 +25,7 @@ class ExcelDetailGrid extends React.Component<IProps, IState> {
         const { indexId } = this.props.match.params
         console.log(indexId )
 
-        axios.get("http://localhost:10001/excel/detail?indexId="+indexId ).then(res => {
+        http.get("/excel/detail?indexId="+indexId ).then(res => {
             console.log(res.data[0])
             let columns =[];
             let gridData = [];
