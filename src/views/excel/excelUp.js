@@ -6,9 +6,9 @@ import {
     Form
 } from 'react-bootstrap';
 
-import Aux from "../../hoc/_Aux";
-import Mcard from "../../App/components/MainCard";
-import http from '../../App/components/HttpTemplate';
+import Aux from "../hoc/_Aux";
+import Mcard from "../App/components/MainCard";
+import axios from "axios";
 import BasicGrid from "./ExcelListGrid";
 
 class ExcelUpload extends React.Component {
@@ -53,7 +53,8 @@ class ExcelUpload extends React.Component {
 
         console.log(formData.getAll('file'))
 
-        http.post("/excelUpload", formData).then(res => {
+
+        axios.post("http://localhost:10001/excelUpload", formData).then(res => {
             console.log(res.data)
             this.setState({selectedFile : null})
             this.fileEvent.current.value = null;
@@ -67,7 +68,7 @@ class ExcelUpload extends React.Component {
 
     excelLIst = () =>{
 
-        http.get("/excel/list").then(res => {
+        axios.get("http://localhost:10001/excel/list").then(res => {
             this.setState({gridData:res.data})
         }).catch(err => {
             console.log(err)
@@ -76,8 +77,7 @@ class ExcelUpload extends React.Component {
 
     channelLIst = () =>{
 
-        http.get("/channels").then(res => {
-            console.log(res)
+        axios.get("http://localhost:10001/channels").then(res => {
             this.setState({channels:res.data})
         }).catch(err => {
             console.log(err)
@@ -96,7 +96,7 @@ class ExcelUpload extends React.Component {
                                     <Form.Control as="select" ref={this.channel}>
                                         {
                                          this.state.channels.map(function (channel) {
-                                                return <option  key={channel.salesChannelId} value={channel.salesChannelId}>{channel.name}</option>
+                                                return <option  key={channel.id} value={channel.id}>{channel.name}</option>
                                           })
                                         }
                                     </Form.Control>
