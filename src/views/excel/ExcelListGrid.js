@@ -13,9 +13,6 @@ interface IState {
 
 }
 class BasicGrid extends React.Component<IProps, IState> {
-    constructor(props: IProps) {
-        super(props);
-    }
 
     redirectDetail(indexId){
         this.props.history.push('/excel/detail'+indexId);
@@ -56,7 +53,7 @@ class BasicGrid extends React.Component<IProps, IState> {
                     }}
                     style={{ fontSize: '14px' }}
                     onClick={({ e, item, value, rowIndex, colIndex }) => {
-                         this.redirectDetail(item.id);
+                        this.redirectDetail(item.id);
                     }}
                 />
             </>

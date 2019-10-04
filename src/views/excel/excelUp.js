@@ -8,8 +8,10 @@ import {
 
 import Aux from "../../hoc/_Aux";
 import Mcard from "../../App/components/MainCard";
-import axios from "axios";
+import http from '../../App/components/HttpTemplate';
 import BasicGrid from "./ExcelListGrid";
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 class ExcelUpload extends React.Component {
 
@@ -37,27 +39,56 @@ class ExcelUpload extends React.Component {
         })
     }
 
-    handlePost = () => {
+    overrideConfirm = () => {
+        confirmAlert({
+            title: '동일한 파일명이 등록되어있습니다.',
+            message: ' 등록되어있는 파일을 덮어쓰겠습니까?',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => {
+                        this.handlePost()
+                    }
+                },
+                {
+                    label: 'No',
+                    onClick: () => {}
+                }
+            ]
+        });
+    }
 
-        //console.log(this.channel.current.value)
-
+    existsExcel = () =>{
         if(this.state.selectedFile == null){
             alert("파일을 선택해 주세요.")
             return ;
         }
 
+        let fileName = this.state.selectedFile.name
+
+        http.get("/excel?fileName="+fileName ).then(res => {
+            if(res.data==true){
+                this.overrideConfirm()
+            }else{
+                this.handlePost()
+            }
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
+    handlePost = () => {
+
         const formData = new FormData();
         formData.append('file', this.state.selectedFile);
-        formData.append('channelId', "1");
+        formData.append('channelId', this.channel.current.value);
         formData.append('vendorId', "1");
 
-        console.log(formData.getAll('file'))
-
-
-        axios.post("http://localhost:10002/excelUpload", formData).then(res => {
+        http.post("/excelUpload", formData).then(res => {
             console.log(res.data)
             this.setState({selectedFile : null})
             this.fileEvent.current.value = null;
+            alert("등록 되었습니다.");
             setInterval(()=>{
                 this.excelLIst()
             },1000)
@@ -68,7 +99,7 @@ class ExcelUpload extends React.Component {
 
     excelLIst = () =>{
 
-        axios.get("http://localhost:10002/excel/list").then(res => {
+        http.get("/excel/list").then(res => {
             this.setState({gridData:res.data})
         }).catch(err => {
             console.log(err)
@@ -77,7 +108,7 @@ class ExcelUpload extends React.Component {
 
     channelLIst = () =>{
 
-        axios.get("http://localhost:10002/channels/1").then(res => {
+        http.get("/channels").then(res => {
             this.setState({channels:res.data})
         }).catch(err => {
             console.log(err)
@@ -95,9 +126,9 @@ class ExcelUpload extends React.Component {
                                     <Form.Label>select channel</Form.Label>
                                     <Form.Control as="select" ref={this.channel}>
                                         {
-                                         this.state.channels.map(function (channel) {
-                                                return <option  key={channel.salesChannelId} value={channel.salesChannelId}>{channel.salesChannelName}</option>
-                                          })
+                                            this.state.channels.map(function (channel) {
+                                                return <option  key={channel.salesChannelId} value={channel.salesChannelId}>{channel.name}</option>
+                                            })
                                         }
                                     </Form.Control>
                                 </Col>
@@ -106,17 +137,17 @@ class ExcelUpload extends React.Component {
                                 <Col md={5}>
                                     <input type="file" name="file" className="btn btn-primary" ref={this.fileEvent}
                                            onChange={ event => this.handleFileInput(event)}></input>
-                                    <Button onClick={this.handlePost}>
+                                    <Button onClick={this.existsExcel}>
                                         등록
                                     </Button>
                                 </Col>
                             </Form.Group>
                         </Mcard>
                         <Mcard title="등록파일 리스트">
-                               <BasicGrid
-                                   gridData={this.state.gridData}
-                               >
-                               </BasicGrid>
+                            <BasicGrid
+                                gridData={this.state.gridData}
+                            >
+                            </BasicGrid>
                         </Mcard>
                     </Col>
                 </Row>
