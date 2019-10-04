@@ -108,7 +108,7 @@ class ExcelUpload extends React.Component {
 
     channelLIst = () =>{
 
-        http.get("/channels").then(res => {
+        http.get("/channels/1").then(res => {
             this.setState({channels:res.data})
         }).catch(err => {
             console.log(err)
@@ -127,7 +127,7 @@ class ExcelUpload extends React.Component {
                                     <Form.Control as="select" ref={this.channel}>
                                         {
                                             this.state.channels.map(function (channel) {
-                                                return <option  key={channel.salesChannelId} value={channel.salesChannelId}>{channel.name}</option>
+                                                return <option  key={channel.salesChannelId} value={channel.salesChannelId}>{channel.salesChannelName}</option>
                                             })
                                         }
                                     </Form.Control>
