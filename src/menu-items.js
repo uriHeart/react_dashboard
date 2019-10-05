@@ -37,6 +37,21 @@ export default {
             ]
         },
         {
+            id: 'navigation',
+            title: 'Navigation',
+            type: 'group',
+            icon: 'icon-navigation',
+            children: [
+                {
+                    id: 'dashboard',
+                    title: 'Dashboard',
+                    type: 'item',
+                    url: '/dashboard',
+                    icon: 'feather icon-home',
+                }
+            ]
+        },
+        {
             id: 'ui-forms',
             title: 'Excel Upload & Search',
             type: 'group',

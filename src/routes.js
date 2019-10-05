@@ -28,6 +28,7 @@ const OtherSamplePage = React.lazy(() => import('./Demo/Other/SamplePage'));
 const OtherDocs = React.lazy(() => import('./Demo/Other/Docs'));
 const ExcelUpload = React.lazy(() => import('./views/excel/excelUp'));
 const Order = React.lazy(() => import('./views/order'));
+const Dashboard = React.lazy(() => import('./views/dashboard'));
 
 const routes = [
     { path: '/dashboard/default', exact: true, name: 'Default', component: DashboardDefault },
@@ -46,6 +47,7 @@ const routes = [
     { path: '/excel-upload', exact: true, name: 'excel upload', component: ExcelUpload },
     { path: '/order', exact: true, name: 'order', component: Order },
     { path: '/excel/detail:indexId', exact: true, name: 'excel detail', component: ExcelDetailGrid },
+    { path: '/dashboard', exact: true, name: 'dashboard', component: Dashboard }
 
 ];
 
