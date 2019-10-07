@@ -5,9 +5,8 @@ import {
   Button,
   Form
 } from 'react-bootstrap';
-import DatePicker from "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
 import DataGrid from '../../App/components/DataGride'
 import moment from 'moment';
 import Aux from "../../hoc/_Aux";
@@ -15,6 +14,9 @@ import http from '../../App/components/HttpTemplate';
 import Mcard from "../../App/components/MainCard";
 import OrderGrid from "./OrderGrid";
 import Workbook from 'react-excel-workbook'
+import ko from 'date-fns/locale/ko';
+registerLocale('ko',ko);
+
 
 class ExcelUpload extends React.Component {
 
@@ -131,8 +133,8 @@ class ExcelUpload extends React.Component {
   export = () => {
     this._export.save();
   }
-
   render() {
+
 
     const timeFormat = ({value}) => {
       return <span>{`${moment(value).format('YYYY-MM-DD HH:mm:ss')}`}</span>
@@ -154,6 +156,7 @@ class ExcelUpload extends React.Component {
                     </Form.Control>
                </Col>
                   <DatePicker
+                    locale="ko"
                     dateFormat="yyyy/MM/dd"
                     className="btn btn-primary"
                     selected={this.state.startDate}
