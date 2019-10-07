@@ -255,7 +255,7 @@ class ExcelUpload extends React.Component {
             />
           </Form>
           <Form>
-            <Workbook filename="example.xlsx" element={<button className="btn btn-lg btn-primary">excel</button>}>
+            <Workbook filename="주문내역.xlsx" element={<button className="btn btn-lg btn-primary">excel</button>}>
               <Workbook.Sheet data={this.state.parsedGridData} name="order data">
                 <Workbook.Column label="주문아이디" value="orderId"/>
                 <Workbook.Column label="주문일시" value="orderedAt" />
