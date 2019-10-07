@@ -3,6 +3,8 @@ import {
     Row,
     Col,
     Button,
+    InputGroup,
+    FormControl,
     Form
 } from 'react-bootstrap';
 
@@ -121,27 +123,26 @@ class ExcelUpload extends React.Component {
                 <Row>
                     <Col>
                         <Mcard title="파일등록">
-                            <Form.Group>
+                            <Row>
                                 <Col md={3}>
-                                    <Form.Label>select channel</Form.Label>
-                                    <Form.Control as="select" ref={this.channel}>
+                                        <Form.Control as="select" ref={this.channel}>
                                         {
                                             this.state.channels.map(function (channel) {
                                                 return <option  key={channel.salesChannelId} value={channel.salesChannelId}>{channel.salesChannelName}</option>
                                             })
                                         }
-                                    </Form.Control>
+                                        </Form.Control>
                                 </Col>
-                            </Form.Group>
-                            <Form.Group>
-                                <Col md={5}>
-                                    <input type="file" name="file" className="btn btn-primary" ref={this.fileEvent}
+                                <Col md={2.5}>
+                                    <input type="file" name="file" className="btn btn-primary"  ref={this.fileEvent}
                                            onChange={ event => this.handleFileInput(event)}></input>
+                                </Col>
+                                <Col>
                                     <Button onClick={this.existsExcel}>
                                         등록
                                     </Button>
                                 </Col>
-                            </Form.Group>
+                            </Row>
                         </Mcard>
                         <Mcard title="등록파일 리스트">
                             <BasicGrid
