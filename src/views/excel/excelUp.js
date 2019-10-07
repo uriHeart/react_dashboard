@@ -126,11 +126,11 @@ class ExcelUpload extends React.Component {
                             <Row>
                                 <Col md={3}>
                                         <Form.Control as="select" ref={this.channel}>
-                                        {
-                                            this.state.channels.map(function (channel) {
-                                                return <option  key={channel.salesChannelId} value={channel.salesChannelId}>{channel.salesChannelName}</option>
-                                            })
-                                        }
+                                            {
+                                                this.state.channels.map(function (channel) {
+                                                    return <option  key={channel.salesChannelId} value={channel.salesChannelId}>{channel.salesChannelName}</option>
+                                                })
+                                            }
                                         </Form.Control>
                                 </Col>
                                 <Col md={2.5}>

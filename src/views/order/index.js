@@ -144,7 +144,9 @@ class ExcelUpload extends React.Component {
             <Row>
                <Col md={3}>
                     <Form.Control as="select" ref={this.channel}>
+                      <option  key="0" value="0">전체</option>
                       {
+
                         this.state.channels.map(function (channel) {
                             return <option  key={channel.salesChannelId} value={channel.salesChannelId}>{channel.salesChannelName}</option>
                         })
@@ -179,12 +181,12 @@ class ExcelUpload extends React.Component {
             {key: 'totalQuantity', name: '총 수량',width: 80},
             {key: 'orderState', name: '오더 상태',width: 150},
             {key: 'orderStateDescription', name: '오더 상태 설명',width: 200},
-            {key: 'vendor.vendorId', name: '벤더 ID',width: 90},
-            {key: 'vendor.vendorName', name: '벤더',width: 100},
-            {key: 'salesChannel.salesChannelId', name: '판매채널 ID',width: 100},
-            {key: 'salesChannel.salesChannelCode', name: '판매채널 코드',width: 100},
+            // {key: 'vendor.vendorId', name: '벤더 ID',width: 90},
+            // {key: 'vendor.vendorName', name: '벤더',width: 100},
+            // {key: 'salesChannel.salesChannelId', name: '판매채널 ID',width: 100},
+            // {key: 'salesChannel.salesChannelCode', name: '판매채널 코드',width: 100},
             {key: 'salesChannel.salesChannelName', name: '판매채널',width: 100},
-            {key: 'salesChannel.baseUrl', name: '판매채널 URL',width: 100},
+            // {key: 'salesChannel.baseUrl', name: '판매채널 URL',width: 100},
             {key: 'orderProduct.productId', name: '벤더아이템 ID (상품 ID)',width: 200},
             {key: 'orderProduct.productName', name: '벤더아이템 이름 (상품명)',width: 300},
             {key: 'orderProduct.productDesc', name: '벤더아이템 설명 (상풍 설명)',width: 200},
@@ -204,42 +206,42 @@ class ExcelUpload extends React.Component {
               key: 'orderAddress.originalAddress.postalCode',
               name: '고객 원본 우편번호',width: 200
             },
-            {
-              key: 'orderAddress.refinedAddress.roadAddress',
-              name: '정제된 도로명 주소',width: 200
-            },
-            {
-              key: 'orderAddress.refinedAddress.jibunAddress',
-              name: '정제된 지번 주소',width: 200
-            },
-            {key: 'orderAddress.refinedAddress.roadName', name: '정제된 도로명',width: 200},
-            {
-              key: 'orderAddress.refinedAddress.postalCode5',
-              name: '정제된 5자리 우편번호',width: 200
-            },
-            {
-              key: 'orderAddress.refinedAddress.postalCode6',
-              name: '정제된 6자리 우편번호',width: 200
-            },
-            {
-              key: 'orderAddress.refinedAddress.buildingMainNumber',
-              name: '정제된 건물 주번지',width: 200
-            },
-            {
-              key: 'orderAddress.refinedAddress.buildingSubNumber',
-              name: '정제된 건물 부번지',width: 200
-            },
-            {
-              key: 'orderAddress.refinedAddress.buildingName',
-              name: '정제된 건물 이름',width: 200
-            },
-            {
-              key: 'orderAddress.refinedAddress.buildingDong',
-              name: '정제된 건물 동',width: 200
-            },
-            {key: 'orderAddress.refinedAddress.buildingHo', name: '정제된 건물 호',width: 200},
-            {key: 'orderAddress.refinedAddress.longitude', name: '경도',width: 80},
-            {key: 'orderAddress.refinedAddress.latitude', name: '위도',width: 80},
+            // {
+            //   key: 'orderAddress.refinedAddress.roadAddress',
+            //   name: '정제된 도로명 주소',width: 200
+            // },
+            // {
+            //   key: 'orderAddress.refinedAddress.jibunAddress',
+            //   name: '정제된 지번 주소',width: 200
+            // },
+            // {key: 'orderAddress.refinedAddress.roadName', name: '정제된 도로명',width: 200},
+            // {
+            //   key: 'orderAddress.refinedAddress.postalCode5',
+            //   name: '정제된 5자리 우편번호',width: 200
+            // },
+            // {
+            //   key: 'orderAddress.refinedAddress.postalCode6',
+            //   name: '정제된 6자리 우편번호',width: 200
+            // },
+            // {
+            //   key: 'orderAddress.refinedAddress.buildingMainNumber',
+            //   name: '정제된 건물 주번지',width: 200
+            // },
+            // {
+            //   key: 'orderAddress.refinedAddress.buildingSubNumber',
+            //   name: '정제된 건물 부번지',width: 200
+            // },
+            // {
+            //   key: 'orderAddress.refinedAddress.buildingName',
+            //   name: '정제된 건물 이름',width: 200
+            // },
+            // {
+            //   key: 'orderAddress.refinedAddress.buildingDong',
+            //   name: '정제된 건물 동',width: 200
+            // },
+            // {key: 'orderAddress.refinedAddress.buildingHo', name: '정제된 건물 호',width: 200},
+            // {key: 'orderAddress.refinedAddress.longitude', name: '경도',width: 80},
+            // {key: 'orderAddress.refinedAddress.latitude', name: '위도',width: 80},
             {key: 'orderAddress.recipient.name', name: '수취인 이름',width: 130},
             {key: 'orderAddress.recipient.phoneNumber1', name: '수취인 전화번호1',width: 150},
             {key: 'orderAddress.recipient.phoneNumber2', name: '수취인 전화번호2',width: 150},
@@ -264,12 +266,12 @@ class ExcelUpload extends React.Component {
                 <Workbook.Column label="총 수량" value="totalQuantity"/>
                 <Workbook.Column label="오더 상태" value="orderState"/>
                 <Workbook.Column label="오더 상태 설명" value="orderStateDescription"/>
-                <Workbook.Column label="벤더 ID" value="vendorvendorId"/>
-                <Workbook.Column label="벤더" value="vendorvendorName" />
-                <Workbook.Column label="판매채널 ID" value="salesChannelsalesChannelId"/>
-                <Workbook.Column label="판매채널 코드" value="salesChannelsalesChannelCode"/>
+                {/*<Workbook.Column label="벤더 ID" value="vendorvendorId"/>*/}
+                {/*<Workbook.Column label="벤더" value="vendorvendorName" />*/}
+                {/*<Workbook.Column label="판매채널 ID" value="salesChannelsalesChannelId"/>*/}
+                {/*<Workbook.Column label="판매채널 코드" value="salesChannelsalesChannelCode"/>*/}
                 <Workbook.Column label="판매채널" value="salesChannelsalesChannelName"/>
-                <Workbook.Column label="판매채널 URL" value="salesChannelbaseUrl"/>
+                {/*<Workbook.Column label="판매채널 URL" value="salesChannelbaseUrl"/>*/}
                 <Workbook.Column label="오벤더아이템 ID (상품 ID)" value="orderProductproductId"/>
                 <Workbook.Column label="벤더아이템 이름 (상품명)" value="orderProductproductName"/>
                 <Workbook.Column label="벤더아이템 설명 (상풍 설명)" value="orderProductproductDesc" />
@@ -283,20 +285,20 @@ class ExcelUpload extends React.Component {
                 <Workbook.Column label="고객 원본 주소2" value="orderAddressoriginalAddressaddress2"/>
                 <Workbook.Column label="고객 원본 전체주소" value="orderAddressoriginalAddressfullAddress"/>
                 <Workbook.Column label="고객 원본 우편번호" value="orderAddressoriginalAddresspostalCode"/>
-                <Workbook.Column label="정제된 도로명 주소" value="orderAddressrefinedAddressroadAddress"/>
-                <Workbook.Column label="정제된 지번 주소" value="orderAddressrefinedAddressjibunAddress"/>
-                <Workbook.Column label="정제된 도로명" value="orderAddressrefinedAddressroadName"/>
-                <Workbook.Column label="정제된 5자리 우편번호" value="orderAddressrefinedAddresspostalCode5"/>
-                <Workbook.Column label="정제된 6자리 우편번호" value="orderAddressrefinedAddresspostalCode6"/>
+                {/*<Workbook.Column label="정제된 도로명 주소" value="orderAddressrefinedAddressroadAddress"/>*/}
+                {/*<Workbook.Column label="정제된 지번 주소" value="orderAddressrefinedAddressjibunAddress"/>*/}
+                {/*<Workbook.Column label="정제된 도로명" value="orderAddressrefinedAddressroadName"/>*/}
+                {/*<Workbook.Column label="정제된 5자리 우편번호" value="orderAddressrefinedAddresspostalCode5"/>*/}
+                {/*<Workbook.Column label="정제된 6자리 우편번호" value="orderAddressrefinedAddresspostalCode6"/>*/}
 
-                <Workbook.Column label="정제된 건물 주번지" value="orderAddressrefinedAddressbuildingMainNumber"/>
-                <Workbook.Column label="정제된 건물 부번지" value="orderAddressrefinedAddressbuildingSubNumber" />
-                <Workbook.Column label="정제된 건물 이름" value="orderAddressrefinedAddressbuildingName"/>
-                <Workbook.Column label="정제된 건물 동" value="orderAddressrefinedAddressbuildingDong"/>
+                {/*<Workbook.Column label="정제된 건물 주번지" value="orderAddressrefinedAddressbuildingMainNumber"/>*/}
+                {/*<Workbook.Column label="정제된 건물 부번지" value="orderAddressrefinedAddressbuildingSubNumber" />*/}
+                {/*<Workbook.Column label="정제된 건물 이름" value="orderAddressrefinedAddressbuildingName"/>*/}
+                {/*<Workbook.Column label="정제된 건물 동" value="orderAddressrefinedAddressbuildingDong"/>*/}
 
-                <Workbook.Column label="정제된 건물 호" value="orderAddressrefinedAddressbuildingHo"/>
-                <Workbook.Column label="경도" value="orderAddressrefinedAddresslongitude" />
-                <Workbook.Column label="위도" value="orderAddressrefinedAddresslatitude"/>
+                {/*<Workbook.Column label="정제된 건물 호" value="orderAddressrefinedAddressbuildingHo"/>*/}
+                {/*<Workbook.Column label="경도" value="orderAddressrefinedAddresslongitude" />*/}
+                {/*<Workbook.Column label="위도" value="orderAddressrefinedAddresslatitude"/>*/}
                 <Workbook.Column label="수취인 이름" value="orderAddressrecipientname"/>
 
                 <Workbook.Column label="수취인 전화번호1" value="orderAddressrecipientphoneNumber1"/>
