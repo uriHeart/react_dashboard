@@ -12,7 +12,6 @@ import moment from 'moment';
 import Aux from "../../hoc/_Aux";
 import http from '../../App/components/HttpTemplate';
 import Mcard from "../../App/components/MainCard";
-import OrderGrid from "./OrderGrid";
 import Workbook from 'react-excel-workbook'
 import ko from 'date-fns/locale/ko';
 registerLocale('ko',ko);
@@ -58,9 +57,9 @@ class ExcelUpload extends React.Component {
   getOrders = () =>{
     const formData = {
       //데이터조회가 안됨으로 하기 3개파라미터 제외
-      // 'from': this.state.startDate,
-      // 'to': this.state.endDate,
-      //'salesChannelId': this.channel.current.value,
+      'from': this.state.startDate,
+      'to': this.state.endDate,
+      'salesChannelId': this.channel.current.value,
       'vendorId': 1
     };
     console.log(this)
