@@ -153,11 +153,16 @@ class ExcelUpload extends React.Component {
                       }
                     </Form.Control>
                </Col>
-                  <DatePicker className="btn btn-primary"
+                  <DatePicker
+                    dateFormat="yyyy/MM/dd"
+                    className="btn btn-primary"
                     selected={this.state.startDate}
                     onChange={this.handleStartChange}
                   />
-                  <DatePicker className="btn btn-primary"
+                  <DatePicker
+                    locale="ko"
+                    dateFormat="yyyy/MM/dd"
+                    className="btn btn-primary"
                     selected={this.state.endDate}
                     onChange={this.handleEndChange}
                   />
