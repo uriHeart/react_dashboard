@@ -50,6 +50,9 @@ class BasicGrid extends React.Component<IProps, IState> {
                         header: {
                             clickAction: 'sort',
                         },
+                        scroller :{
+                            horizontalScrollerWidth:85
+                        }
                     }}
                     style={{ fontSize: '14px' }}
                     onClick={({ e, item, value, rowIndex, colIndex }) => {
