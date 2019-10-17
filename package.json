@@ -2,7 +2,7 @@
   "name": "datta-able-rv18.0.4",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/front",
+  "homepage": "/",
   "dependencies": {
     "axios": "^0.19.0",
     "axui-datagrid": "^0.14.8",
