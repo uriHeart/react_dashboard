@@ -60,7 +60,7 @@ class Home extends React.Component {
 
                             <div class="flex-w m-t-10 m-b-10">
                                 <a href="#" class="size2-1 m2-txt1 flex-c-m how-btn1 trans-04">
-                                    Concat us
+                                    Contact us
                                 </a>
                             </div>
                             <div class="flex-w m-t-10 m-b-10">&nbsp;</div>
@@ -73,7 +73,7 @@ class Home extends React.Component {
 
                         <div class="flex-col-c-m p-l-15 p-r-15 p-t-50 p-b-120">
                             <h3 class="l1-txt1 txt-center p-b-40 respon1">
-                                Argo Coming Soon
+                                Argo is Coming Soon
                             </h3>
 
                             <div class="flex-w flex-c-m cd100">
