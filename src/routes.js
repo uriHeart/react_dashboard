@@ -29,7 +29,6 @@ const OtherDocs = React.lazy(() => import('./Demo/Other/Docs'));
 const ExcelUpload = React.lazy(() => import('./views/excel/excelUp'));
 const Order = React.lazy(() => import('./views/order'));
 const Dashboard = React.lazy(() => import('./views/dashboard'));
-
 const routes = [
     { path: '/dashboard/default', exact: true, name: 'Default', component: DashboardDefault },
     { path: '/basic/button', exact: true, name: 'Basic Button', component: UIBasicButton },
