@@ -31,7 +31,7 @@ const Order = React.lazy(() => import('./views/order'));
 const Dashboard = React.lazy(() => import('./views/dashboard'));
 
 const routes = [
-    { path: '/dashboard/default', exact: true, name: 'Default', component: DashboardDefault },
+    { path: '/dashboard/default', exact: true, name: 'Default', component: DashboardDefault, isPublic: false },
     { path: '/basic/button', exact: true, name: 'Basic Button', component: UIBasicButton },
     { path: '/basic/badges', exact: true, name: 'Basic Badges', component: UIBasicBadges },
     { path: '/basic/breadcrumb-paging', exact: true, name: 'Basic Breadcrumb Pagination', component: UIBasicBreadcrumbPagination },
@@ -44,8 +44,8 @@ const routes = [
     { path: '/maps/google-map', exact: true, name: 'Google Map', component: GoogleMap },
     { path: '/sample-page', exact: true, name: 'Sample Page', component: OtherSamplePage },
     { path: '/docs', exact: true, name: 'Documentation', component: OtherDocs },
-    { path: '/excel-upload', exact: true, name: 'excel upload', component: ExcelUpload },
-    { path: '/order', exact: true, name: 'order', component: Order },
+    { path: '/excel-upload', exact: true, name: 'excel upload', component: ExcelUpload, isPublic: false },
+    { path: '/order', exact: true, name: 'order', component: Order, isPublic: false },
     { path: '/excel/detail:indexId', exact: true, name: 'excel detail', component: ExcelDetailGrid },
     { path: '/dashboard', exact: true, name: 'dashboard', component: Dashboard }
 
