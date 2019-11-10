@@ -65,7 +65,7 @@ class Home extends React.Component {
                             </div>
                             <div class="flex-w m-t-10 m-b-10">&nbsp;</div>
                             <div class="flex-w m-t-10 m-b-10">
-                                <NavLink to="/auth/signup-1" class="size2-1 m2-txt1 flex-c-m how-btn1 trans-04">
+                                <NavLink to="/auth/signup" class="size2-1 m2-txt1 flex-c-m how-btn1 trans-04">
                                     Sign Up
                                 </NavLink>
                             </div>

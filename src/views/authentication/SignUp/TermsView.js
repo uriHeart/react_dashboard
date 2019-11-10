@@ -49,14 +49,14 @@ class TermsView extends React.Component {
         <div>
           <label>
             ARGO 서비스 이용약관 (필수)
-            <button>약관 보기</button>
+            <button className={'btn'}>약관 보기</button>
           </label>
           <input type="checkbox" onChange={this.serviceTermHandle} value={this.state.serviceTerm}  checked={this.state.serviceTerm}/>
         </div>
         <div>
           <label>
             개인정보 취급방침 (필수)
-            <button>약관 보기</button>
+            <button className={'btn'}>약관 보기</button>
           </label>
           <input type="checkbox" onChange={this.PrivacyTermHandle} value={this.state.privacyTerm} checked={this.state.privacyTerm}/>
         </div>

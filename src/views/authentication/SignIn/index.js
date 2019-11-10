@@ -33,8 +33,14 @@ class SignUp1 extends React.Component {
             password: rsaEncrypt.encrypt(this.state.password)
         }).then(res => {
             if (res.data === true) {
-                // this.props.loginDispatch();
-                this.props.history.push('/');
+                const {redirect} = this.props.match.params;
+                if (redirect !== '') {
+                    console.log(decodeURIComponent(redirect));
+                    this.props.history.push(decodeURIComponent(redirect));
+                } else {
+                    // this.props.loginDispatch();
+                    this.props.history.push('/');
+                }
             } else {
                 alert('login fail');
             }

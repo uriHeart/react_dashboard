@@ -6,13 +6,14 @@ import Aux from "../../../hoc/_Aux";
 import Breadcrumb from "../../../App/layout/AdminLayout/Breadcrumb";
 import http from '../../../App/components/HttpTemplate'
 import JSEncrypt from 'jsencrypt';
-import EmailId from "./components/EmailId";
-import Password from "./components/Password";
-import RepeatPassword from "./components/RepeatPassword";
-import CompanyName from "./components/CompanyName";
-import PhoneNumber from "./components/PhoneNumber";
-import ManagerName from "./components/ManagerName";
+import EmailId from "./EmailId";
+import Password from "./Password";
+import RepeatPassword from "./RepeatPassword";
+import CompanyName from "./CompanyName";
+import PhoneNumber from "./PhoneNumber";
+import ManagerName from "./ManagerName";
 import {inject, observer} from "mobx-react";
+import ButtonLoader from "../../../components/ButtonLoader";
 
 @inject(stores => ({
   email: stores.signUpStore.email,
@@ -25,7 +26,7 @@ import {inject, observer} from "mobx-react";
   privacyTerm: stores.signUpStore.privacyTerm
 }))
 @observer
-class SignUp1 extends React.Component {
+class SignUp extends React.Component {
 
   constructor(props) {
     super(props);
@@ -40,46 +41,50 @@ class SignUp1 extends React.Component {
   }
 
   handleRegisterUser = () => {
+    const promise = new Promise((resolve, reject) => {
+      resolve('result');
+    });
+
     if (!this.props.serviceTerm || !this.props.privacyTerm) {
       alert('약관에 동의해 주세요.');
-      return;
+      return promise;
     }
 
     const emailRegx = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
     if (!this.props.email.match(emailRegx)) {
       alert('email 형식이 올바르지 않습니다.');
-      return;
+      return promise;
     }
 
     if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/.test(this.props.password)) {
       alert('비밀번호 형식이 올바르지 않습니다.');
-      return;
+      return promise;
     }
 
     if (this.props.password !== this.props.repeatPassword) {
       alert('비밀번호가 일치하지 않습니다.');
-      return;
+      return promise;
     }
 
     const emptyRegx = /^\s+|\s+$/g;
     if (this.props.managerName.replace(emptyRegx, "") === '') {
       alert('담당자명을 입력해 주세요.');
-      return;
+      return promise;
     }
 
     if (this.props.company.replace(emptyRegx, "") === '') {
       alert('회사명을 입력해 주세요.');
-      return;
+      return promise;
     }
 
     const numberRegx = /^[0-9]*$/;
     if (!numberRegx.test(this.props.phoneNumber)) {
       alert('핸드폰 번호를 입력해주세요.');
-      return;
+      return new Promise(() => true);
     }
     const rsaEncrypt = new JSEncrypt();
     rsaEncrypt.setPublicKey(this.state.rsaPublicKey);
-    http.post('/api/auth/seller-register', {
+    return http.post('/api/auth/seller-register', {
       email: this.props.email,
       password: rsaEncrypt.encrypt(this.props.password),
       company: this.props.company,
@@ -115,9 +120,7 @@ class SignUp1 extends React.Component {
                 <CompanyName/>
                 <PhoneNumber/>
                 <TermsView/>
-                <button className="btn btn-primary shadow-2 mb-4"
-                        onClick={this.handleRegisterUser}>가입하기
-                </button>
+                <ButtonLoader class={'btn btn-primary shadow-2 mb-4'} process={this.handleRegisterUser} text={'가입하기'}/>
                 <p className="mb-0 text-muted">Allready have an
                   account? <NavLink to="/auth/signin-1">Login</NavLink></p>
               </div>
@@ -129,4 +132,4 @@ class SignUp1 extends React.Component {
   }
 }
 
-export default SignUp1;
+export default SignUp;

@@ -1,8 +1,8 @@
 import React from "react";
-import InputWithLabel from "./InputWithLabel";
+import InputWithLabel from "../../../components/InputWithLabel";
 import {inject} from 'mobx-react';
 
-@inject('signUpStore')
+@inject('additionalInfoStore')
 class CompanyName extends React.Component {
 
   constructor(props) {
@@ -12,7 +12,7 @@ class CompanyName extends React.Component {
   render() {
     return (
       <InputWithLabel className="md-8"
-                      label="회사명"
+                      label="사업자 유형"
                       placeholder="회사 이름을 입력해 주세요"
                       store={this.props.signUpStore.inputCompany}
       />
