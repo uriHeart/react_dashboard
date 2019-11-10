@@ -2,7 +2,7 @@ import ajax from 'axios'
 
 // const defaultHost = 'localhost';
 const defaultHost = 'backend.argoport.com';
-// const defaultUrl = 'https://' + defaultHost + ':10002';
+// const defaultUrl = 'http://' + defaultHost + ':10002';
 const defaultUrl = 'https://' + defaultHost ;
 
 const header = {
@@ -23,6 +23,7 @@ const http = {
     }).then(res => {
       return res;
     }).catch((error) => {
+      return error;
       // http.notAuth(error);
     });
   },

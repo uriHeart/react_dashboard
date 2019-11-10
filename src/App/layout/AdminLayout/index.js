@@ -42,8 +42,21 @@ class AdminLayout extends Component {
         document.addEventListener('mozfullscreenchange', this.fullScreenExitHandler);
         document.addEventListener('MSFullscreenChange', this.fullScreenExitHandler);
 
+        const fakeAuth = {
+            isAuthenticated: true,
+            authenticate(cb) {
+                this.isAuthenticated = true;
+                setTimeout(cb, 100);
+            },
+            signout(cb) {
+                this.isAuthenticated = false;
+                setTimeout(cb, 100);
+            }
+        };
+
         const menu = routes.map((route, index) => {
             return (route.component) ? (
+              route.isPublic ? (
                 <Route
                     key={index}
                     path={route.path}
@@ -52,6 +65,16 @@ class AdminLayout extends Component {
                     render={props => (
                         <route.component {...props} />
                     )} />
+              ) : (
+                fakeAuth.isAuthenticated ? (<Route
+                  key={index}
+                  path={route.path}
+                  exact={route.exact}
+                  name={route.name}
+                  render={props => (
+                    <route.component {...props} />
+                  )} />) : (<Redirect to='/auth/signin-1' />)
+              )
             ) : (null);
         });
 
