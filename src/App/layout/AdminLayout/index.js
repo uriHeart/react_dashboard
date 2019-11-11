@@ -11,6 +11,7 @@ import Loader from "../Loader";
 import routes from "../../../routes";
 import Aux from "../../../hoc/_Aux";
 import * as actionTypes from "../../../store/actions";
+import http from '../../components/HttpTemplate';
 
 import './app.scss';
 
@@ -34,7 +35,16 @@ class AdminLayout extends Component {
         }
     }
 
+    check() {
+        http.get("/api/auth-check").then(res => {
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
     render() {
+
+        this.check();
 
         /* full screen exit call */
         document.addEventListener('fullscreenchange', this.fullScreenExitHandler);
