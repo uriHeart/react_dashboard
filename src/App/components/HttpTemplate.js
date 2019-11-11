@@ -13,7 +13,10 @@ const http = {
   defaultIp: defaultHost,
   notAuth: function (error) {
     if (error.response.data && error.response.data.status === 403) {
-      window.location.href = '/login';
+      alert("권한이 없습니다.");
+      window.location.href = '/auth/signin-1';
+    } else {
+      alert("시스템 오류가 발생되었습니다. 관리자에게 문의하시기 바랍니다.");
     }
   },
   get: (path) => {
@@ -23,7 +26,7 @@ const http = {
     }).then(res => {
       return res;
     }).catch((error) => {
-      // http.notAuth(error);
+      http.notAuth(error);
     });
   },
   post: (path, body) => {
@@ -33,7 +36,8 @@ const http = {
     }).then((res) => {
       return res;
     }).catch(error => {
-      // http.notAuth(error);
+      alert("error: " + error);
+      http.notAuth(error);
       throw error;
     });
   },
@@ -44,7 +48,7 @@ const http = {
     }).then((res) => {
       return res;
     }).catch(error => {
-      // http.notAuth(error);
+      http.notAuth(error);
     });
   }
 };
