@@ -1,7 +1,7 @@
 import ajax from 'axios'
 
-const defaultHost = 'localhost';
-// const defaultHost = 'backend.argoport.com';
+// const defaultHost = 'localhost';
+const defaultHost = 'backend.argoport.com';
 const defaultUrl = 'http://' + defaultHost + ':10002';
 // const defaultUrl = 'https://' + defaultHost ;
 
