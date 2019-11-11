@@ -36,7 +36,7 @@ class ExcelUpload extends React.Component {
   }
 
   channelLIst = () => {
-    http.get("/channels/1").then(res => {
+    http.get("/channels/" + window.$vendorId).then(res => {
       this.setState({channels: res.data})
     }).catch(err => {
       console.log(err)
@@ -60,7 +60,7 @@ class ExcelUpload extends React.Component {
       'from': this.state.startDate,
       'to': this.state.endDate,
       'salesChannelId': this.channel.current.value,
-      'vendorId': 1
+      'vendorId': window.$vendorId
     };
     console.log(this)
      http.post("/orders", formData).then(res => {

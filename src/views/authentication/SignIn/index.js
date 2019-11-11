@@ -7,6 +7,9 @@ import Breadcrumb from "../../../App/layout/AdminLayout/Breadcrumb";
 import JSEncrypt from 'jsencrypt';
 import http from '../../../App/components/HttpTemplate'
 
+window.$vendorId = 0;
+window.$dashboardUrl = "";
+
 class SignUp1 extends React.Component {
 
     constructor(props) {
@@ -32,15 +35,11 @@ class SignUp1 extends React.Component {
             loginId: this.state.loginId,
             password: rsaEncrypt.encrypt(this.state.password)
         }).then(res => {
-            if (res.data === true) {
-                const {redirect} = this.props.match.params;
-                if (redirect !== '') {
-                    console.log(decodeURIComponent(redirect));
-                    this.props.history.push(decodeURIComponent(redirect));
-                } else {
-                    // this.props.loginDispatch();
-                    this.props.history.push('/');
-                }
+            if (res.data.success === true) {
+                // this.props.loginDispatch();
+                window.$vendorId = res.data.vendorId;
+                window.$dashboardUrl = res.data.dashboardUrl;
+                this.props.history.push('/');
             } else {
                 alert('login fail');
             }
