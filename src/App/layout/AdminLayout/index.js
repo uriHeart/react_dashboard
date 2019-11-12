@@ -35,12 +35,12 @@ class AdminLayout extends Component {
         }
     }
 
-    check() {
-        http.get("/api/auth-check").then(res => {
-        }).catch(err => {
-            console.log(err)
-        })
-    }
+    // check() {
+    //     http.get("/api/auth-check").then(res => {
+    //     }).catch(err => {
+    //         console.log(err)
+    //     })
+    // }
 
     render() {
 
