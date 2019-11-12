@@ -44,7 +44,7 @@ class AdminLayout extends Component {
 
     render() {
 
-        this.check();
+        // this.check();
 
         /* full screen exit call */
         document.addEventListener('fullscreenchange', this.fullScreenExitHandler);
