@@ -14,7 +14,7 @@ const http = {
   notAuth: function (error) {
     if (error.response.data && error.response.data.status === 403) {
       alert("권한이 없습니다.");
-      window.location.href = '/auth/signin';
+      window.location.href = '/#/auth/signin';
     } else {
       alert("시스템 오류가 발생되었습니다. 관리자에게 문의하시기 바랍니다.");
     }
