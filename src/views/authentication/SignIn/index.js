@@ -39,7 +39,7 @@ class SignUp1 extends React.Component {
                 // this.props.loginDispatch();
                 window.$vendorId = res.data.vendorId;
                 window.$dashboardUrl = res.data.dashboardUrl;
-                this.props.history.push('/');
+                this.props.history.push('/dashboard');
             } else {
                 alert('login fail');
             }

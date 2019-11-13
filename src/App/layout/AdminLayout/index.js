@@ -15,6 +15,9 @@ import http from '../../components/HttpTemplate';
 
 import './app.scss';
 
+window.$vendorId = 0;
+window.$dashboardUrl = "";
+
 class AdminLayout extends Component {
 
     fullScreenExitHandler = () => {
@@ -35,16 +38,24 @@ class AdminLayout extends Component {
         }
     }
 
-    // check() {
-    //     http.get("/api/auth-check").then(res => {
-    //     }).catch(err => {
-    //         console.log(err)
-    //     })
-    // }
+    check() {
+        http.get("/api/auth-check").then(res => {
+            if (res.data.success === true) {
+                // this.props.loginDispatch();
+                window.$vendorId = res.data.vendorId;
+                window.$dashboardUrl = res.data.dashboardUrl;
+            } else {
+                alert("권한이 없습니다.");
+                window.location.href = '/#/auth/signin';
+            }
+        }).catch(err => {
+            console.log(err)
+        })
+    }
 
     render() {
 
-        // this.check();
+        this.check();
 
         /* full screen exit call */
         document.addEventListener('fullscreenchange', this.fullScreenExitHandler);
