@@ -92,7 +92,7 @@ class SignUp1 extends React.Component {
                                 </div>
                                 <button className="btn btn-primary shadow-2 mb-4" onClick={this.handleLogin}>Login</button>
                                 <p className="mb-2 text-muted">Forgot password? <NavLink to="/auth/reset-password-1">Reset</NavLink></p>
-                                <p className="mb-0 text-muted">Don’t have an account? <NavLink to="/auth/signup-1">Signup</NavLink></p>
+                                <p className="mb-0 text-muted">Don’t have an account? <NavLink to="/auth/signup">Signup</NavLink></p>
                             </div>
                         </div>
                     </div>

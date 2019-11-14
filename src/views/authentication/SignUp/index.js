@@ -122,7 +122,7 @@ class SignUp extends React.Component {
                 <TermsView/>
                 <ButtonLoader class={'btn btn-primary shadow-2 mb-4'} process={this.handleRegisterUser} text={'가입하기'}/>
                 <p className="mb-0 text-muted">Allready have an
-                  account? <NavLink to="/auth/signin-1">Login</NavLink></p>
+                  account? <NavLink to="/auth/signin">Login</NavLink></p>
               </div>
             </div>
           </div>
