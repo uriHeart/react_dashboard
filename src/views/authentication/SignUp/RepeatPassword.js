@@ -1,8 +1,9 @@
 import React from "react";
 import InputWithLabel from "../../../components/InputWithLabel";
-import {inject} from "mobx-react";
+import {inject, observer} from "mobx-react";
 
 @inject('signUpStore')
+@observer
 class RepeatPassword extends React.Component {
 
   constructor(props) {
@@ -16,6 +17,7 @@ class RepeatPassword extends React.Component {
                       placeholder="비밀번호를 한 번 더 입력해주세요"
                       inputType="password"
                       store={this.props.signUpStore.inputRepeatPassword}
+                      text={this.props.signUpStore.repeatPassword}
       />
     )
   }

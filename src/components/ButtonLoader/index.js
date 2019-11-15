@@ -16,7 +16,7 @@ export default class ButtonLoader extends Component {
     const { loading } = this.state;
 
     return (
-      <div style={{ marginTop: "60px" }}>
+      <div style={{ marginTop: "20px" }}>
         <button className={this.props.class || 'button'} onClick={this.fetchData} disabled={loading}>
           {loading && (
             <i
