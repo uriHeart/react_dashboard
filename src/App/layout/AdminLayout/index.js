@@ -39,7 +39,7 @@ class AdminLayout extends Component {
     }
 
     check() {
-        http.get("/api/auth-check").then(res => {
+        http.get("/api/check/auth").then(res => {
             if (res.data.success === true) {
                 // this.props.loginDispatch();
                 window.$vendorId = res.data.vendorId;
