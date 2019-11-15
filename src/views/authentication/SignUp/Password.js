@@ -1,8 +1,9 @@
 import React from "react";
 import InputWithLabel from "../../../components/InputWithLabel";
-import {inject} from "mobx-react";
+import {inject, observer} from "mobx-react";
 
 @inject('signUpStore')
+@observer
 class Password extends React.Component {
 
   constructor(props) {
@@ -16,6 +17,7 @@ class Password extends React.Component {
                       placeholder="영문+숫자+특수문자 조합 8자 이상"
                       inputType="password"
                       store={this.props.signUpStore.inputPassword}
+                      text={this.props.signUpStore.password}
       />
     )
   }
