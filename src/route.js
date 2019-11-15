@@ -10,7 +10,7 @@ const route = [
     { path: '/auth/signup', exact: true, name: 'Signup', component: SignUp },
     { path: '/auth/signin/:redirect', exact: true, name: 'Signin', component: SignIn },
     { path: '/auth/signin', exact: true, name: 'Signin', component: SignIn },
-    { path: '/home', exact: true, name: 'Signin', component: home },
+    { path: '/', exact: true, name: 'Index', component: home },
     { path: '/auth/confirm/:uuid', exact: true, name: 'RegistrationConfirm', component: RegistrationConfirm },
     { path: '/auth/additional-info', exact: true, name: 'AdditionalInfo', component: AdditionalInfo }
 ];

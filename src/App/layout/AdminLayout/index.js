@@ -11,8 +11,12 @@ import Loader from "../Loader";
 import routes from "../../../routes";
 import Aux from "../../../hoc/_Aux";
 import * as actionTypes from "../../../store/actions";
+import http from '../../components/HttpTemplate';
 
 import './app.scss';
+
+window.$vendorId = 0;
+window.$dashboardUrl = "";
 
 class AdminLayout extends Component {
 
@@ -34,7 +38,24 @@ class AdminLayout extends Component {
         }
     }
 
+    check() {
+        http.get("/api/check/auth").then(res => {
+            if (res.data.success === true) {
+                // this.props.loginDispatch();
+                window.$vendorId = res.data.vendorId;
+                window.$dashboardUrl = res.data.dashboardUrl;
+            } else {
+                alert("권한이 없습니다.");
+                window.location.href = '/#/auth/signin';
+            }
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
     render() {
+
+        this.check();
 
         /* full screen exit call */
         document.addEventListener('fullscreenchange', this.fullScreenExitHandler);

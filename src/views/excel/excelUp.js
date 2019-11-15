@@ -84,7 +84,7 @@ class ExcelUpload extends React.Component {
         const formData = new FormData();
         formData.append('file', this.state.selectedFile);
         formData.append('channelId', this.channel.current.value);
-        formData.append('vendorId', "1");
+        formData.append('vendorId', window.$vendorId);
 
         http.post("/excelUpload", formData).then(res => {
             console.log(res.data)
