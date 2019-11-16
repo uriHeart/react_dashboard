@@ -9,6 +9,7 @@ import http from '../../../App/components/HttpTemplate'
 
 window.$vendorId = 0;
 window.$dashboardUrl = "";
+window.$totalDashboardUrl = "";
 
 class SignUp1 extends React.Component {
 
@@ -39,6 +40,7 @@ class SignUp1 extends React.Component {
                 // this.props.loginDispatch();
                 window.$vendorId = res.data.vendorId;
                 window.$dashboardUrl = res.data.dashboardUrl;
+                window.$totalDashboardUrl = res.data.totalDashboardUrl;
                 this.props.history.push('/dashboard');
             } else {
                 alert('login fail');

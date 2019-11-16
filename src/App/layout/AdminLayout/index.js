@@ -17,6 +17,7 @@ import './app.scss';
 
 window.$vendorId = 0;
 window.$dashboardUrl = "";
+window.$totalDashboardUrl = "";
 
 class AdminLayout extends Component {
 
@@ -44,6 +45,7 @@ class AdminLayout extends Component {
                 // this.props.loginDispatch();
                 window.$vendorId = res.data.vendorId;
                 window.$dashboardUrl = res.data.dashboardUrl;
+                window.$totalDashboardUrl = res.data.totalDashboardUrl;
             } else {
                 alert("권한이 없습니다.");
                 window.location.href = '/#/auth/signin';
