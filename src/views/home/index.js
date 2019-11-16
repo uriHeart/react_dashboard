@@ -59,16 +59,16 @@ class Home extends React.Component {
                             </div>
 
                             <div class="flex-w m-t-10 m-b-10">
-                                <a href="#" class="size2-1 m2-txt1 flex-c-m how-btn1 trans-04">
-                                    Contact us
+                                <a href="#" class="size3 flex-c-m how-social trans-04 m-r-3 m-l-3 m-b-5">
+                                    <i class="feather icon-smartphone auth-icon"/>
                                 </a>
                                 &nbsp;
-                                <NavLink to="/auth/signup" class="size2-1 m2-txt1 flex-c-m how-btn1 trans-04">
-                                    Sign Up
+                                <NavLink to="/auth/signup" class="size3 flex-c-m how-social trans-04 m-r-3 m-l-3 m-b-5">
+                                    <i class="feather icon-user-plus auth-icon"/>
                                 </NavLink>
                                 &nbsp;
-                                <NavLink to="/auth/signin" class="size2-1 m2-txt1 flex-c-m how-btn1 trans-04">
-                                    Sign In
+                                <NavLink to="/auth/signin" class="size3 flex-c-m how-social trans-04 m-r-3 m-l-3 m-b-5">
+                                    <i class="feather icon-unlock auth-icon"/>
                                 </NavLink>
                             </div>
                         </div>
