@@ -34,7 +34,7 @@ class SearchAddressModal extends React.Component {
 
   render() {
     return (
-      <React.Fragment className={'hidden'}>
+      <React.Fragment key='1'>
         <div className="Modal-overlay"/>
         <div className="Modal">
           <p className="title">주소검색</p>

@@ -19,6 +19,7 @@ class BusinessLicense extends React.Component {
                       placeholder="선택된 파일이 없습니다"
                       inputType={'file'}
                       store={this.props.additionalInfoStore.inputBusinessLicense}
+                      fileStore={this.props.additionalInfoStore.inputBusinessLicenseFile}
                       text={this.props.additionalInfoStore.businessLicense}
       >
       </InputWithLabel>

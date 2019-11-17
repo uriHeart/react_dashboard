@@ -5,6 +5,7 @@ const SignIn = React.lazy(() => import('./views/authentication/SignIn'));
 const home = React.lazy(() => import('./views/home'));
 const RegistrationConfirm = React.lazy(() => import('./views/authentication/RegistrationConfirm'));
 const AdditionalInfo = React.lazy(() => import('./views/authentication/AdditionalInfo'));
+const ResetPassword = React.lazy(() => import('./views/authentication/ResetPassword'));
 
 const route = [
     { path: '/auth/signup', exact: true, name: 'Signup', component: SignUp },
@@ -12,7 +13,8 @@ const route = [
     { path: '/auth/signin', exact: true, name: 'Signin', component: SignIn },
     { path: '/', exact: true, name: 'Index', component: home },
     { path: '/auth/confirm/:uuid', exact: true, name: 'RegistrationConfirm', component: RegistrationConfirm },
-    { path: '/auth/additional-info', exact: true, name: 'AdditionalInfo', component: AdditionalInfo }
+    { path: '/auth/additional-info', exact: true, name: 'AdditionalInfo', component: AdditionalInfo },
+    { path: '/auth/reset-password', exact: true, name: 'ResetPassword', component: ResetPassword }
 ];
 
 export default route;

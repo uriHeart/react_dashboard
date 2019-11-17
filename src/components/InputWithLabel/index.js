@@ -11,6 +11,9 @@ export default class InputWithLabel extends React.Component {
 
   inputChange = (event) => {
     this.props.store(event.target.value);
+    if (this.props.inputType === 'file') {
+      this.props.fileStore(event.target.files[0]);
+    }
   };
 
   isValid = () => {
@@ -41,9 +44,6 @@ export default class InputWithLabel extends React.Component {
           />
           {this.props.children}
         </div>
-        <text>
-          {this.state.errorMessage}
-        </text>
       </div>
     )
   }
