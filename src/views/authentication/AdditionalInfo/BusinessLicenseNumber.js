@@ -13,7 +13,36 @@ class BusinessLicenseNumber extends React.Component {
   }
 
   checkBusinessLicenseNumber = () => {
-    HttpTemplate.get('/')
+    // HttpTemplate.get('/businessLicenseNumber/{number}/companyName/{companyName}')
+    const bizNumber = this.props.additionalInfoStore.businessLicenseNumber;
+    if (!this.checkBizId(bizNumber)) {
+      alert('상버자 번호가 올바르지 않습니다.\n숫자만 입력해 주세요.');
+    } else {
+      alert('확인되었습니다.');
+    }
+    this.props.additionalInfoStore.confirmBusinessLicenseNumber(this.checkBizId(bizNumber));
+
+  };
+
+
+  checkBizId = (bizID) => {
+    if (bizID.trim() === '') {
+      return false;
+    }
+    // bizID는 숫자만 10자리로 해서 문자열로 넘긴다.
+    const checkID = [1, 3, 7, 1, 3, 7, 1, 3, 5, 1];
+    let tmpBizID, i, chkSum = 0, c2, remander;
+    bizID = bizID.replace(/-/gi, '');
+
+    for (i = 0; i <= 7; i++) {
+      chkSum += checkID[i] * bizID.charAt(i);
+    }
+    c2 = "0" + (checkID[8] * bizID.charAt(8));
+    c2 = c2.substring(c2.length - 2, c2.length);
+    chkSum += Math.floor(c2.charAt(0)) + Math.floor(c2.charAt(1));
+    remander = (10 - (chkSum % 10)) % 10;
+
+    return Math.floor(bizID.charAt(9)) === remander;
   };
 
   render() {

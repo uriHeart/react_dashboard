@@ -1,6 +1,5 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.css'
-import { FormGroup, FormLabel, FormControl} from 'react-bootstrap';
 
 export default class SelectBoxWithLabel extends React.Component {
 

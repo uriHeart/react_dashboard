@@ -16,11 +16,12 @@ class BusinessTypeSelect extends React.Component {
                       placeholder="회사 이름을 입력해 주세요"
                       store={this.props.additionalInfoStore.inputBusinessType}
       >
-        <option value="1">개인사업자(간이과세자)</option>
-        <option value="2">개인사업자(일반과세자)</option>
-        <option value="3">법인사업자</option>
-        <option value="3">면세사업자</option>
-        <option value="3">해외사업자</option>
+        <option value=''>선택해 주세요 </option>
+        <option value="SELF_EMPLOYED_SIMPLE">개인사업자(간이과세자)</option>
+        <option value="SELF_EMPLOYED_NORMAL">개인사업자(일반과세자)</option>
+        <option value="LEGAL_EMPLOYED">법인사업자</option>
+        <option value="DUTY_FREE_EMPLOYED">면세사업자</option>
+        <option value="OVERSEAS_EMPLOYED">해외사업자</option>
       </SelectBoxWithLabel>
     )
   }

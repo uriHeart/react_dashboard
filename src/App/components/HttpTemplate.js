@@ -1,9 +1,9 @@
 import ajax from 'axios'
 
-// const defaultHost = 'localhost';
-const defaultHost = 'backend.argoport.com';
-// const defaultUrl = 'http://' + defaultHost + ':10002';
-const defaultUrl = 'https://' + defaultHost ;
+const defaultHost = 'localhost';
+// const defaultHost = 'backend.argoport.com';
+const defaultUrl = 'http://' + defaultHost + ':10002';
+// const defaultUrl = 'https://' + defaultHost ;
 
 const header = {
   'Content-Type': 'application/json;charset=UTF-8'
@@ -29,16 +29,17 @@ const http = {
       http.notAuth(error);
     });
   },
-  post: (path, body) => {
+  post: (path, body, externalHeader) => {
     return ajax.post(defaultUrl + path, body, {
-      headers: header,
+      headers: Object.assign(header, externalHeader),
       withCredentials: true
     }).then((res) => {
       return res;
     }).catch(error => {
       alert("error: " + error);
       http.notAuth(error);
-      throw error;
+      // throw error;
+      return error;
     });
   },
   put: (path, body) => {
