@@ -34,7 +34,7 @@ class Index extends React.Component {
     }
 
     if (!store.businessLicenseNumberConfirmed) {
-      alert('사업자 번호를 확인해 주세요.');
+      alert('사업자 번호를 확인 버튼을 클릭해 주세요.');
       return promise;
     }
 
@@ -81,7 +81,8 @@ class Index extends React.Component {
     return HttpTemplate.post('/userInfo/additionalInfo', formData, {
       'Content-Type': 'multipart/form-data'
     }).then(res => {
-
+      alert('등록 완료되었습니다.');
+      this.props.history.push('/dashboard');
     });
 
   };

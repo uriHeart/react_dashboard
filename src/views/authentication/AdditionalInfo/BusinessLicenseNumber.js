@@ -2,7 +2,6 @@ import React from "react";
 import {inject, observer} from 'mobx-react';
 import InputWithLabel from "../../../components/InputWithLabel";
 import {Button} from "react-bootstrap";
-import HttpTemplate from '../../../App/components/HttpTemplate';
 
 @inject('additionalInfoStore')
 @observer
@@ -13,10 +12,9 @@ class BusinessLicenseNumber extends React.Component {
   }
 
   checkBusinessLicenseNumber = () => {
-    // HttpTemplate.get('/businessLicenseNumber/{number}/companyName/{companyName}')
     const bizNumber = this.props.additionalInfoStore.businessLicenseNumber;
     if (!this.checkBizId(bizNumber)) {
-      alert('상버자 번호가 올바르지 않습니다.\n숫자만 입력해 주세요.');
+      alert('사업자자 번호가 올바르지 않습니다.\n숫자만 입력해 주세요.');
     } else {
       alert('확인되었습니다.');
     }
