@@ -37,11 +37,16 @@ class SignUp1 extends React.Component {
             password: rsaEncrypt.encrypt(this.state.password)
         }).then(res => {
             if (res.data.success === true) {
-                // this.props.loginDispatch();
                 window.$vendorId = res.data.vendorId;
                 window.$dashboardUrl = res.data.dashboardUrl;
                 window.$totalDashboardUrl = res.data.totalDashboardUrl;
-                this.props.history.push('/dashboard');
+
+                const {redirect} = this.props.match.params;
+                if (redirect !== '') {
+                    this.props.history.push(decodeURIComponent(redirect));
+                } else {
+                    this.props.history.push('/dashboard');
+                }
             } else {
                 alert('login fail');
             }
