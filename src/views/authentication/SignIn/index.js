@@ -42,7 +42,7 @@ class SignUp1 extends React.Component {
                 window.$totalDashboardUrl = res.data.totalDashboardUrl;
 
                 const {redirect} = this.props.match.params;
-                if (redirect !== '') {
+                if (redirect !== undefined && redirect !== '') {
                     this.props.history.push(decodeURIComponent(redirect));
                 } else {
                     this.props.history.push('/dashboard');

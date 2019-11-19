@@ -1,38 +1,39 @@
 export default {
     items: [
         {
-            id: 'navigation',
-            title: 'Navigation',
+            id: 'dashboard',
+            title: '대시보드',
             type: 'group',
-            icon: 'icon-navigation',
+            icon: 'icon-pie-chart',
             children: [
                 {
                     id: 'dashboard',
                     title: 'Dashboard',
                     type: 'item',
                     url: '/dashboard',
-                    icon: 'feather icon-home',
+                    icon: 'feather icon-bar-chart',
                 }
             ]
         },
         {
-            id: 'ui-forms',
-            title: 'Excel Upload & Search',
+            id: 'Order',
+            title: '주문',
             type: 'group',
             icon: 'icon-group',
             children: [
                 {
-                    id: 'excelUp',
-                    title: '엑셀 업로드',
-                    type: 'item',
-                    url: '/excel-upload',
-                    icon: 'feather icon-file-text'
-                }, {
                     id: 'order',
                     title: '주문 조회',
                     type: 'item',
                     url: '/order',
-                    icon: 'feather icon-file-text'
+                    icon: 'feather icon-alert-octagon'
+                },
+                {
+                    id: 'excelUp',
+                    title: '수동 주문 업로드',
+                    type: 'item',
+                    url: '/excel-upload',
+                    icon: 'feather icon-upload'
                 }
             ]
         }
