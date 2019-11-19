@@ -2,7 +2,7 @@ export default {
     items: [
         {
             id: 'dashboard',
-            title: '대시보드',
+            title: 'Analysis',
             type: 'group',
             icon: 'icon-pie-chart',
             children: [
