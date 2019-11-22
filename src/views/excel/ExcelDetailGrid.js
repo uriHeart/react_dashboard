@@ -22,6 +22,7 @@ class ExcelDetailGrid extends React.Component<IProps, IState> {
 
     componentDidMount(){
         const { indexId } = this.props.match.params
+        this.setState({loadingData:true})
 
         http.get("/excel/detail?indexId="+indexId ).then(res => {
             let gridData =res.data;

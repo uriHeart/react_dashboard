@@ -43,8 +43,10 @@ class BasicGrid extends React.Component<IProps, IState> {
                     height={300}
                     data={gridData}
                     columns={columns}
+
                     options={{
-                        showLineNumber: false,
+                        columnHeight:35,
+                        showLineNumber: true,
                         showRowSelector: false,
                         asidePanelWidth: 900,
                         header: {
@@ -54,7 +56,10 @@ class BasicGrid extends React.Component<IProps, IState> {
                             horizontalScrollerWidth:85
                         }
                     }}
-                    style={{ fontSize: '14px' }}
+                    styles={{
+                        elHeight:305
+                    }}
+                    style={{ fontSize: '17px' ,elHeight: 305 }}
                     onClick={({ e, item, value, rowIndex, colIndex }) => {
                         this.redirectDetail(item.id);
                     }}

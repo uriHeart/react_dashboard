@@ -56,17 +56,17 @@ class ExcelUpload extends React.Component {
 
   getOrders = () =>{
     const formData = {
-      //데이터조회가 안됨으로 하기 3개파라미터 제외
       'from': this.state.startDate,
       'to': this.state.endDate,
       'salesChannelId': this.channel.current.value,
       'vendorId': 1
     };
     console.log(this)
-     http.post("/orders", formData).then(res => {
+    this.setState({loading:true})
+
+    http.post("/orders", formData).then(res => {
 
       this.setState({gridData : res.data})
-      console.log(res.data)
        const excelDownData =[];
 
        res.data.forEach(row =>{
@@ -128,13 +128,12 @@ class ExcelUpload extends React.Component {
     })
   };
 
-  _export;
-  export = () => {
-    this._export.save();
-  }
+  // _export;
+  // export = () => {
+  //   this._export.save();
+  // }
+
   render() {
-
-
     const timeFormat = ({value}) => {
       return <span>{`${moment(value).format('YYYY-MM-DD HH:mm:ss')}`}</span>
     };

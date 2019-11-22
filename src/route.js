@@ -1,11 +1,20 @@
 import React from 'react';
 
-const SignUp1 = React.lazy(() => import('./Demo/Authentication/SignUp/SignUp1'));
-const Signin1 = React.lazy(() => import('./Demo/Authentication/SignIn/SignIn1'));
+const SignUp = React.lazy(() => import('./views/authentication/SignUp'));
+const SignIn = React.lazy(() => import('./views/authentication/SignIn'));
+const home = React.lazy(() => import('./views/home'));
+const RegistrationConfirm = React.lazy(() => import('./views/authentication/RegistrationConfirm'));
+const AdditionalInfo = React.lazy(() => import('./views/authentication/AdditionalInfo'));
+const ResetPassword = React.lazy(() => import('./views/authentication/ResetPassword'));
 
 const route = [
-    { path: '/auth/signup-1', exact: true, name: 'Signup 1', component: SignUp1 },
-    { path: '/auth/signin-1', exact: true, name: 'Signin 1', component: Signin1 }
+    { path: '/auth/signup', exact: true, name: 'Signup', component: SignUp },
+    { path: '/auth/signin/:redirect', exact: true, name: 'Signin', component: SignIn },
+    { path: '/auth/signin', exact: true, name: 'Signin', component: SignIn },
+    { path: '/', exact: true, name: 'Index', component: home },
+    { path: '/auth/confirm/:uuid', exact: true, name: 'RegistrationConfirm', component: RegistrationConfirm },
+    { path: '/auth/additional-info', exact: true, name: 'AdditionalInfo', component: AdditionalInfo },
+    { path: '/auth/reset-password', exact: true, name: 'ResetPassword', component: ResetPassword }
 ];
 
 export default route;
