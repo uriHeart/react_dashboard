@@ -1,9 +1,12 @@
 import ajax from 'axios'
+import config from "../../config";
 
-// const defaultHost = 'localhost';
-const defaultHost = 'backend.argoport.com';
-// const defaultUrl = 'http://' + defaultHost + ':10002';
-const defaultUrl = 'https://' + defaultHost ;
+const defaultHttp = config.backendHttp
+
+const defaultHost = config.backendHost
+const defaultPort = config.backendPort
+
+const defaultUrl = defaultHttp + defaultHost +":"+ defaultPort ;
 
 const header = {
   'Content-Type': 'application/json;charset=UTF-8'
