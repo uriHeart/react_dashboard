@@ -4,7 +4,7 @@ import { MDBContainer, MDBIframe } from "mdbreact";
 const IframePage = () => {
     return (
         <MDBContainer className="text-center">
-            <MDBIframe src={ window.$dashboardUrl } height="1750px" />
+            <MDBIframe src={ window.$totalDashboardUrl } height="1650px" />
         </MDBContainer>
     );
 }
