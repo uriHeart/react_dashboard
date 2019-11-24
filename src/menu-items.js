@@ -8,14 +8,14 @@ export default {
             children: [
                 {
                     id: 'dashboard',
-                    title: '이번주 현황',
+                    title: '이번주 판매현황',
                     type: 'item',
                     url: '/dashboard',
                     icon: 'feather icon-bar-chart',
                 },
                 {
                     id: 'dashboard',
-                    title: '전체 현황',
+                    title: '전체 판매현황',
                     type: 'item',
                     url: '/all-dashboard',
                     icon: 'feather icon-pie-chart',
