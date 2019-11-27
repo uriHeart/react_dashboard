@@ -1,5 +1,5 @@
 import React from "react";
-import InputWithLabel from "../../../components/InputWithLabel";
+import InputWithLabel from "../../components/InputWithLabel";
 import {inject, observer} from "mobx-react";
 
 @inject('signUpStore')

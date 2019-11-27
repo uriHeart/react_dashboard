@@ -7,8 +7,8 @@ import Breadcrumb from "../../../App/layout/AdminLayout/Breadcrumb";
 import http from '../../../App/components/HttpTemplate'
 import JSEncrypt from 'jsencrypt';
 import EmailId from "./EmailId";
-import Password from "./Password";
-import RepeatPassword from "./RepeatPassword";
+import Password from "../Password";
+import RepeatPassword from "../RepeatPassword";
 import CompanyName from "./CompanyName";
 import PhoneNumber from "./PhoneNumber";
 import ManagerName from "./ManagerName";
@@ -92,7 +92,7 @@ class SignUp extends React.Component {
       phoneNumber: this.props.phoneNumber
     }).then(res => {
       alert('확인 이메일이 발송되었습니다.\nlogin 화면으로 이동합니다.');
-      this.props.history.push('/auth/signin-1')
+      this.props.history.push('/auth/signin')
     }).catch(error => {
       alert(error.response.data.message);
     });

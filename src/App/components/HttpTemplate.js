@@ -16,6 +16,7 @@ const http = {
   defaultIp: defaultHost,
   notAuth: function (error) {
     if (error.response.data && error.response.data.status === 403) {
+      localStorage.clear();
       alert("권한이 없습니다.");
       window.location.href = '/#/auth/signin';
     } else {
@@ -30,6 +31,7 @@ const http = {
       return res;
     }).catch((error) => {
       http.notAuth(error);
+      return error;
     });
   },
   post: (path, body, externalHeader) => {
@@ -53,6 +55,7 @@ const http = {
       return res;
     }).catch(error => {
       http.notAuth(error);
+      return error;
     });
   }
 };
