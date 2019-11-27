@@ -9,16 +9,25 @@ class Index extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      emailInput : ''
+    }
   }
 
-  registrationConfirmHandle = () => {
-    const {uuid} = this.props.match.params;
-    return http.get(`/api/auth/confirm/${uuid}`).then(res => {
-      alert(`${res.data}\nlogin 화면으로 이동합니다.\n추가 정보를 등록해 주세요.`);
-      this.props.history.push('/auth/signin/' + encodeURIComponent('/auth/additional-info'))
+  resetPasswordHandle = () => {
+    const mail = this.state.emailInput;
+    return http.get(`/user/password/passwordRecovery/${mail}`).then(res => {
+      alert('login 화면으로 이동합니다.\n이메일을 확인해 주세요.');
+      this.props.history.push('/auth/signin')
     }).catch(error => {
       alert(error.response.data.message);
       return false;
+    });
+  };
+
+  emailInputChange = (event) => {
+    this.setState({
+      emailInput: event.target.value
     });
   };
 
@@ -37,8 +46,9 @@ class Index extends React.Component {
             <div className="card">
               <div className="col-12 card-body text-center">
                 <h3 className="col-12">비밀번호 리셋</h3>
-                <input type='text' className="form-control" placeholder={'아이디 (이메일주소)'} />
-                <ButtonLoader class={'btn btn-primary shadow-2 mb-4'} process={this.registrationConfirmHandle} text={'비밀번호 리셋 이메일 보내기'}/>
+                <input type='text' className="form-control" placeholder={'아이디 (이메일주소)'} onChange={this.emailInputChange}
+                       value={this.state.emailInput } />
+                <ButtonLoader class={'btn btn-primary shadow-2 mb-4'} process={this.resetPasswordHandle} text={'비밀번호 리셋 이메일 보내기'}/>
               </div>
             </div>
           </div>

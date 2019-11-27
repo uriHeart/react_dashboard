@@ -15,7 +15,7 @@ class NavRight extends Component {
     };
 
     render() {
-
+        const userId = localStorage.getItem('userId');
         return (
             <Aux>
                 <ul className="navbar-nav ml-auto">
@@ -40,7 +40,7 @@ class NavRight extends Component {
                                         <div className="media">
                                             <img className="img-radius" src={Avatar1} alt="Generic placeholder"/>
                                             <div className="media-body">
-                                                <p><strong>John Doe</strong><span className="n-time text-muted"><i
+                                                <p><strong>{userId}</strong><span className="n-time text-muted"><i
                                                     className="icon feather icon-clock m-r-10"/>30 min</span></p>
                                                 <p>New ticket Added</p>
                                             </div>
@@ -87,7 +87,7 @@ class NavRight extends Component {
                             <Dropdown.Menu alignRight className="profile-notification">
                                 <div className="pro-head">
                                     <img src={Avatar1} className="img-radius" alt="User Profile"/>
-                                    <span>John Doe</span>
+                                    <span>{userId}</span>
                                     <a href={DEMO.BLANK_LINK} className="dud-logout" title="Logout">
                                         <i className="feather icon-log-out"/>
                                     </a>

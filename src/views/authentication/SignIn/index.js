@@ -22,6 +22,10 @@ class SignUp1 extends React.Component {
     }
 
     componentDidMount() {
+        this.getRsaPublicKey();
+    }
+
+    getRsaPublicKey() {
         http.get('/api/auth/key').then((res) => {
             this.setState({
                 'rsaPublicKey': res.data
@@ -37,18 +41,21 @@ class SignUp1 extends React.Component {
             password: rsaEncrypt.encrypt(this.state.password)
         }).then(res => {
             if (res.data.success === true) {
+                localStorage.setItem('auth', 'true');
+                localStorage.setItem('userId', res.data.userId);
                 window.$vendorId = res.data.vendorId;
                 window.$dashboardUrl = res.data.dashboardUrl;
                 window.$totalDashboardUrl = res.data.totalDashboardUrl;
 
                 const {redirect} = this.props.match.params;
-                if (redirect !== '') {
+                if (redirect !== undefined && redirect !== '') {
                     this.props.history.push(decodeURIComponent(redirect));
                 } else {
                     this.props.history.push('/dashboard');
                 }
             } else {
-                alert('login fail');
+                alert(res.data.message);
+                this.getRsaPublicKey();
             }
         }).catch(error => {
             console.log('error');
@@ -98,7 +105,7 @@ class SignUp1 extends React.Component {
                                     </div>
                                 </div>
                                 <button className="btn btn-primary shadow-2 mb-4" onClick={this.handleLogin}>Login</button>
-                                <p className="mb-2 text-muted">Forgot password? <NavLink to="/auth/reset-password-1">Reset</NavLink></p>
+                                <p className="mb-2 text-muted">Forgot password? <NavLink to="/auth/reset-password">Reset</NavLink></p>
                                 <p className="mb-0 text-muted">Don’t have an account? <NavLink to="/auth/signup">Signup</NavLink></p>
                             </div>
                         </div>

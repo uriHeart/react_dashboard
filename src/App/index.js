@@ -1,5 +1,5 @@
 import React, { Component, Suspense } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import {Switch, Route, Redirect} from 'react-router-dom';
 import Loadable from 'react-loadable';
 
 import '../../node_modules/font-awesome/scss/font-awesome.scss';
@@ -16,7 +16,12 @@ const AdminLayout = Loadable({
 
 class App extends Component {
     render() {
+
         const menu = routes.map((route, index) => {
+          const auth = localStorage.getItem('auth');
+          if (auth !== 'true' && route.isNotPublic !== undefined && route.isNotPublic) {
+            return (route.component) ? (<Redirect to='/auth/signin' />) : null;
+          }
           return (route.component) ? (
               <Route
                   key={index}
@@ -26,7 +31,7 @@ class App extends Component {
                   render={props => (
                       <route.component {...props} />
                   )} />
-          ) : (null);
+          ) : null;
         });
 
         return (

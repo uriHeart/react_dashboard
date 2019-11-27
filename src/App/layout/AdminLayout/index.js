@@ -39,15 +39,20 @@ class AdminLayout extends Component {
         }
     }
 
-    check() {
-        http.get("/api/check/auth").then(res => {
+    async check() {
+        const auth = localStorage.getItem('auth');
+        if (auth !== 'true') {
+            window.location.href = '/#/auth/signin';
+            return ;
+        }
+        await http.get("/api/check/auth").then(res => {
             if (res.data.success === true) {
                 // this.props.loginDispatch();
                 window.$vendorId = res.data.vendorId;
                 window.$dashboardUrl = res.data.dashboardUrl;
                 window.$totalDashboardUrl = res.data.totalDashboardUrl;
             } else {
-                alert("권한이 없습니다.");
+                localStorage.clear();
                 window.location.href = '/#/auth/signin';
             }
         }).catch(err => {
@@ -98,7 +103,7 @@ class AdminLayout extends Component {
                     <route.component {...props} />
                   )} />) : (<Redirect to='/auth/signin-1' />)
               )
-            ) : (null);
+            ) : null;
         });
 
         return (
