@@ -74,12 +74,6 @@ class SignUp1 extends React.Component {
         })
     };
 
-    handleKeyDown =(e) =>{
-        if(e.key  === 'Enter'){
-            this.handleLogin()
-        }
-    }
-
     render () {
         return(
             <Aux>
