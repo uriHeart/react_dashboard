@@ -67,6 +67,12 @@ class SignUp1 extends React.Component {
         })
     };
 
+    handleKeyDown =(e) =>{
+        if(e.key  === 'Enter'){
+            this.handleLogin()
+        }
+    }
+
     render () {
         return(
             <Aux>
@@ -89,7 +95,7 @@ class SignUp1 extends React.Component {
                                     <input type="loginId" className="form-control" placeholder="loginId" onChange={this.changeInputId}/>
                                 </div>
                                 <div className="input-group mb-4">
-                                    <input type="password" className="form-control" placeholder="password" onChange={this.changeInputPassword}/>
+                                    <input type="password" className="form-control" placeholder="password" onKeyDown={(e)=>{if(e.key==='Enter')this.handleLogin()}} onChange={this.changeInputPassword}/>
                                 </div>
                                 <div className="form-group text-left">
                                     <div className="checkbox checkbox-fill d-inline">
