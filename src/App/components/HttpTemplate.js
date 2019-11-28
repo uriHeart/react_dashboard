@@ -57,6 +57,17 @@ const http = {
       http.notAuth(error);
       return error;
     });
+  },
+  delete: (path, body) => {
+    return ajax.delete(defaultUrl + path, body, {
+      headers: header,
+      withCredentials: true
+    }).then((res) => {
+      return res;
+    }).catch(error => {
+      http.notAuth(error);
+      return error;
+    });
   }
 };
 

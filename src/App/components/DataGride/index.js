@@ -61,6 +61,7 @@ class Main extends Component {
                 rowsCount={this.props.row.length}
                 // minHeight={900}
                 emptyRowsView={EmptyRowsView}
+                getCellActions={this.props.cellAction}
             />
         )
     }
