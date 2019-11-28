@@ -40,7 +40,9 @@ class SignUp1 extends React.Component {
             loginId: this.state.loginId,
             password: rsaEncrypt.encrypt(this.state.password)
         }).then(res => {
-            if (res.data.success === true) {
+
+            console.log(res)
+            // if (res.data.success === true) {
                 localStorage.setItem('auth', 'true');
                 localStorage.setItem('userId', res.data.userId);
                 window.$vendorId = res.data.vendorId;
@@ -53,10 +55,10 @@ class SignUp1 extends React.Component {
                 } else {
                     this.props.history.push('/dashboard');
                 }
-            } else {
-                alert(res.data.message);
-                this.getRsaPublicKey();
-            }
+            // } else {
+            //     alert(res.data.message);
+            //     this.getRsaPublicKey();
+            // }
         }).catch(error => {
             console.log('error');
         });
