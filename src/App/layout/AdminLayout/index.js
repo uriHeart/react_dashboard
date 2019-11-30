@@ -40,24 +40,24 @@ class AdminLayout extends Component {
     }
 
     async check() {
-        const auth = localStorage.getItem('auth');
-        if (auth !== 'true') {
-            window.location.href = '/#/auth/signin';
-            return ;
-        }
-        await http.get("/api/check/auth").then(res => {
-            if (res.data.success === true) {
-                // this.props.loginDispatch();
-                window.$vendorId = res.data.vendorId;
-                window.$dashboardUrl = res.data.dashboardUrl;
-                window.$totalDashboardUrl = res.data.totalDashboardUrl;
-            } else {
-                localStorage.clear();
-                window.location.href = '/#/auth/signin';
-            }
-        }).catch(err => {
-            console.log(err)
-        })
+    //     const auth = localStorage.getItem('auth');
+    //     if (auth !== 'true') {
+    //         window.location.href = '/#/auth/signin';
+    //         return ;
+    //     }
+    //     await http.get("/api/check/auth").then(res => {
+    //         if (res.data.success === true) {
+    //             // this.props.loginDispatch();
+    //             window.$vendorId = res.data.vendorId;
+    //             window.$dashboardUrl = res.data.dashboardUrl;
+    //             window.$totalDashboardUrl = res.data.totalDashboardUrl;
+    //         } else {
+    //             localStorage.clear();
+    //             window.location.href = '/#/auth/signin';
+    //         }
+    //     }).catch(err => {
+    //         console.log(err)
+    //     })
     }
 
     render() {

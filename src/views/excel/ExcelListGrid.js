@@ -100,8 +100,11 @@ class BasicGrid extends React.Component<IProps, IState> {
 
 
         const deleteDocument = (docId) =>{
+            this.deleteThisGoal()
+
+            return;
             http.delete("/excel/delete/?docId="+docId).then(res => {
-                setTimeout(this.excelLIst(),1000)
+                this.excelLIst()
                 this.deleteThisGoal()
             }).catch(err => {
                 console.log(err)

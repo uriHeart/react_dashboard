@@ -43,6 +43,21 @@ export default {
                     icon: 'feather icon-upload'
                 }
             ]
+        },
+        {
+            id: 'Order',
+            title: '카탈로그',
+            type: 'group',
+            icon: 'icon-group',
+            children: [
+                {
+                    id: 'order',
+                    title: '상품 조회',
+                    type: 'item',
+                    url: '/sku',
+                    icon: 'feather icon-alert-octagon'
+                }
+            ]
         }
     ]
 }

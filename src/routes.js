@@ -12,6 +12,7 @@ const Order = React.lazy(() => import('./views/order'));
 const Dashboard = React.lazy(() => import('./views/dashboard'));
 const AllDashboard = React.lazy(() => import('./views/allDashboard'));
 const ExcelDetailGrid = React.lazy(() => import('./views/excel/ExcelDetailGrid'));
+const Sku = React.lazy(() => import('./views/sku'));
 
 const routes = [
     { path: '/dashboard/default', exact: true, name: 'Default', component: DashboardDefault, isPublic: false },
@@ -19,7 +20,9 @@ const routes = [
     { path: '/order', exact: true, name: 'order', component: Order, isPublic: false },
     { path: '/excel/detail:indexId', exact: true, name: 'excel detail', component: ExcelDetailGrid },
     { path: '/dashboard', exact: true, name: 'dashboard', component: Dashboard },
-    { path: '/all-dashboard', exact: true, name: 'all-dashboard', component: AllDashboard }
+    { path: '/all-dashboard', exact: true, name: 'all-dashboard', component: AllDashboard },
+    { path: '/sku', exact: true, name: 'sku', component: Sku }
+
 ];
 
 export default routes;
