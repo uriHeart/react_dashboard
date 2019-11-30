@@ -106,37 +106,7 @@ class Sku extends React.Component {
     return (
         <Aux>
           <Mcard>
-            <Row>
-              <Col md={3}>
-                <Form.Control as="select" ref={this.channel}>
-                  <option  key="0" value="0">전체</option>
-                  {
 
-                    this.state.channels.map(function (channel) {
-                      return <option  key={channel.salesChannelId} value={channel.salesChannelId}>{channel.salesChannelName}</option>
-                    })
-                  }
-                </Form.Control>
-              </Col>
-              <DatePicker
-                  locale="ko"
-                  dateFormat="yyyy/MM/dd"
-                  className="btn btn-primary"
-                  selected={this.state.startDate}
-                  onChange={this.handleStartChange}
-              />
-              <DatePicker
-                  locale="ko"
-                  dateFormat="yyyy/MM/dd"
-                  className="btn btn-primary"
-                  selected={this.state.endDate}
-                  onChange={this.handleEndChange}
-              />
-              <Button onClick={this.getOrders}>
-                검색
-              </Button>
-            </Row>
-            <hr/>
             {/*<OrderGrid*/}
             {/*    gridData={this.state.gridData}*/}
 
