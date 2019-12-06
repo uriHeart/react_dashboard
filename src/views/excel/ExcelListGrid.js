@@ -102,10 +102,32 @@ class BasicGrid extends React.Component<IProps, IState> {
         const deleteDocument = (docId) =>{
             this.deleteThisGoal()
 
+            let gridData = this.state.gridData;
+            console.log(gridData);
+            gridData.forEach(g=>{
+                if(g.rowId == docId){
+
+                }
+            })
+
+            gridData.remove(0)
+
+            this.setState({gridData:gridData})
             return;
             http.delete("/excel/delete/?docId="+docId).then(res => {
                 this.excelLIst()
                 this.deleteThisGoal()
+
+                let gridData = this.state.gridData;
+                gridData.forEach(g=>{
+                    if(g.rowId == docId){
+
+                    }
+                })
+
+                gridData.remove(0)
+
+                this.setState(gridData)
             }).catch(err => {
                 console.log(err)
             })

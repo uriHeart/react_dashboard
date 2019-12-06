@@ -39,6 +39,8 @@ class ExcelDetailGrid extends React.Component<IProps, IState> {
 
         let i=0;
         const grid = gridData.map(sheetData => {
+            console.log(sheetData)
+
             i++;
             let columns = [];
             sheetData.sheetHeader.forEach(function (header) {
