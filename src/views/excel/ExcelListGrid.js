@@ -28,11 +28,8 @@ class BasicGrid extends React.Component<IProps, IState> {
         this.excelLIst()
     }
 
-    excelLIst(){
-        console.log("exclist")
+    excelLIst() {
         http.get("/excel/list").then(res => {
-            console.log(res)
-
             this.setState({gridData:res.data})
         }).catch(err => {
             console.log(err)
@@ -40,7 +37,7 @@ class BasicGrid extends React.Component<IProps, IState> {
     }
 
 
-    deleteThisGoal() {
+    deleteResultMessage() {
         const getAlert = () => (
             <Alert variant='success' onClose={ ()=>{
                 this.setState({
@@ -56,7 +53,6 @@ class BasicGrid extends React.Component<IProps, IState> {
         });
 
         setTimeout( this.hideAlert ,3000)
-
     }
 
 
@@ -100,34 +96,15 @@ class BasicGrid extends React.Component<IProps, IState> {
 
 
         const deleteDocument = (docId) =>{
-            this.deleteThisGoal()
-
-            let gridData = this.state.gridData;
-            console.log(gridData);
-            gridData.forEach(g=>{
-                if(g.rowId == docId){
-
-                }
-            })
-
-            gridData.remove(0)
-
-            this.setState({gridData:gridData})
-            return;
             http.delete("/excel/delete/?docId="+docId).then(res => {
-                this.excelLIst()
-                this.deleteThisGoal()
+                this.deleteResultMessage()
 
-                let gridData = this.state.gridData;
-                gridData.forEach(g=>{
-                    if(g.rowId == docId){
+                let gridData = [...this.state.gridData];
+                console.log(gridData);
+                gridData.splice(docId,1)
 
-                    }
-                })
+                this.setState({gridData:gridData})
 
-                gridData.remove(0)
-
-                this.setState(gridData)
             }).catch(err => {
                 console.log(err)
             })

@@ -21,7 +21,7 @@ class ExcelUpload extends React.Component {
         super(props);
         this.state = {
             selectedFile: null,
-            channels:[]
+            channels: []
         }
 
         this.fileEvent = React.createRef();
@@ -72,28 +72,34 @@ class ExcelUpload extends React.Component {
             if(res.data==true){
                 this.overrideConfirm()
             }else{
-                this.handlePost()
+                this.handlePost(fileName)
             }
         }).catch(err => {
             console.log(err)
         })
     }
 
-    handlePost = () => {
+    handlePost = (fileName) => {
 
         const formData = new FormData();
         formData.append('file', this.state.selectedFile);
         formData.append('channelId', this.channel.current.value);
         formData.append('vendorId', window.$vendorId);
 
+        console.log("window.vendorid")
+
+        console.log(window.$vendorId)
+
         http.post("/excelUpload", formData).then(res => {
             console.log(res.data)
             this.setState({selectedFile : null})
             this.fileEvent.current.value = null;
             alert("등록 되었습니다.");
-            setInterval(()=>{
-                this.excelLIst()
-            },1000)
+            this.props.history.push('/excel/detail'+fileName);
+            // setInterval(()=>{
+            //     this.props.history.push('/excel/detail'+fileName);
+            //     this.excelLIst()
+            // },1000)
         }).catch(err => {
             console.log(err)
         })

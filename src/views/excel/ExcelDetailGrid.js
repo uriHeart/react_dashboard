@@ -8,25 +8,24 @@ import Mcard from "../../App/components/MainCard";
 import http from '../../App/components/HttpTemplate';
 
 
-interface IProps {
-}
-interface IState {
-}
-class ExcelDetailGrid extends React.Component<IProps, IState> {
+
+class ExcelDetailGrid extends React.Component {
     constructor(props: IProps) {
         super(props);
         this.state = {
-            gridData: []
+            gridData: [],
+            indexId: ""
         }
     }
 
     componentDidMount(){
-        const { indexId } = this.props.match.params
+        const param = this.props.match.params
 
-        http.get("/excel/detail?indexId="+indexId ).then(res => {
+        http.get("/excel/detail?indexId="+param.indexId ).then(res => {
             let gridData =res.data;
             this.setState({
-                gridData: gridData
+                gridData: gridData,
+                indexId : param.indexId
             })
         }).catch(err => {
             console.log(err)
@@ -55,7 +54,7 @@ class ExcelDetailGrid extends React.Component<IProps, IState> {
             let sheet = sheetData.sheetData;
 
             return (
-                <Mcard title={sheetData.fileName} key={i}>
+                <Mcard title={this.state.indexId} key={i}>
                     <DataGrid key={i}
                         width={width}
                         data={sheet}
