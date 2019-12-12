@@ -70,9 +70,9 @@ class BasicGrid extends React.Component<IProps, IState> {
 
     render() {
 
-        const redirectDetail = (indexId) =>{
-            localStorage.setItem('channelId', this.state.channel.current.value);
-            this.props.history.push('/excel/detail'+indexId);
+        const redirectDetail = (row) =>{
+            localStorage.setItem('channelId', row.channelId);
+            this.props.history.push('/excel/detail'+row.id);
         }
 
 
@@ -121,11 +121,6 @@ class BasicGrid extends React.Component<IProps, IState> {
                 width: 200
             },
             {
-                key: 'channelId',
-                name: 'channelId',
-                width: 200
-            },
-            {
                 key: 'fileName',
                 name: '등록파일명',
                 width: 700,
@@ -151,7 +146,7 @@ class BasicGrid extends React.Component<IProps, IState> {
                     {
                         icon: "feather icon-external-link f-30 text-c-green",
                         callback: () => {
-                            redirectDetail(row.id)
+                            redirectDetail(row)
                         }
                     }
                 ]
