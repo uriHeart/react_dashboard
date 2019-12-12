@@ -11,6 +11,7 @@ import {confirmAlert} from "react-confirm-alert";
 
 interface IProps {
     gridData: any[];
+    channel: 0
 
 }
 interface IState {
@@ -21,8 +22,10 @@ class BasicGrid extends React.Component<IProps, IState> {
         super(props);
         this.state = {
             gridData: [],
-            alert:null
+            alert:null,
+            channel: this.props.channel
         }
+        console.log(this.state)
     }
     componentDidMount() {
         this.excelLIst()
@@ -30,6 +33,7 @@ class BasicGrid extends React.Component<IProps, IState> {
 
     excelLIst() {
         http.get("/excel/list").then(res => {
+            console.log(res.data)
             this.setState({gridData:res.data})
         }).catch(err => {
             console.log(err)
@@ -67,6 +71,7 @@ class BasicGrid extends React.Component<IProps, IState> {
     render() {
 
         const redirectDetail = (indexId) =>{
+            localStorage.setItem('channelId', this.state.channel.current.value);
             this.props.history.push('/excel/detail'+indexId);
         }
 
@@ -100,13 +105,11 @@ class BasicGrid extends React.Component<IProps, IState> {
                 this.deleteResultMessage()
 
                 let gridData = [...this.state.gridData];
-                console.log(gridData);
                 gridData.splice(docId,1)
 
                 this.setState({gridData:gridData})
 
             }).catch(err => {
-                console.log(err)
             })
 
         }
@@ -115,6 +118,11 @@ class BasicGrid extends React.Component<IProps, IState> {
             {
                 key: 'upLoadDate',
                 name: '등록일시',
+                width: 200
+            },
+            {
+                key: 'channelId',
+                name: 'channelId',
                 width: 200
             },
             {
@@ -143,7 +151,6 @@ class BasicGrid extends React.Component<IProps, IState> {
                     {
                         icon: "feather icon-external-link f-30 text-c-green",
                         callback: () => {
-                            console.log(row.id)
                             redirectDetail(row.id)
                         }
                     }
@@ -156,7 +163,6 @@ class BasicGrid extends React.Component<IProps, IState> {
             <Aux>
                     <div>
                         <DataGrid
-                            history={this.props.history}
                             row={this.state.gridData}
                             mapper={columns}
                             cellAction={getCellActions}

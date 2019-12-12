@@ -41,7 +41,7 @@ const http = {
     }).then((res) => {
       return res;
     }).catch(error => {
-      alert("error: " + error);
+      alert("error: " + error.response.data.message);
       http.notAuth(error);
       // throw error;
       return error;

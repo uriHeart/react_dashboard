@@ -4,7 +4,7 @@ import {
     Col,
     Button,
     InputGroup,
-    FormControl,
+    ProgressBar,
     Form
 } from 'react-bootstrap';
 
@@ -21,7 +21,10 @@ class ExcelUpload extends React.Component {
         super(props);
         this.state = {
             selectedFile: null,
-            channels: []
+            channels: [],
+            progressVisible: "none",
+            progressNow: 10,
+            uploading:false
         }
 
         this.fileEvent = React.createRef();
@@ -39,6 +42,22 @@ class ExcelUpload extends React.Component {
         this.setState({
             selectedFile : e.target.files[0]
         })
+    }
+
+    addProgressNow = ()=>{
+        this.setState({
+            progressNow : this.state.progressNow + 10
+        })
+
+        if(this.state.progressVisible===""){
+            setTimeout(this.addProgressNow,1000)
+        }
+
+        if(this.state.progressNow>=100){
+            this.setState({
+                progressNow : 10
+            })
+        }
     }
 
     overrideConfirm = () => {
@@ -66,41 +85,54 @@ class ExcelUpload extends React.Component {
             return ;
         }
 
+        if(this.state.upLoading){
+            alert("등록중입니다.");
+            return;
+        }
+
         let fileName = this.state.selectedFile.name
 
         http.get("/excel?fileName="+fileName ).then(res => {
+
             if(res.data==true){
                 this.overrideConfirm()
             }else{
                 this.handlePost(fileName)
             }
         }).catch(err => {
+            this.setState({
+                progressVisible:"none",
+                progressNow:10,
+                upLoading:false
+            })
             console.log(err)
         })
     }
 
-    handlePost = (fileName) => {
-
+    handlePost = () => {
+        const fileName = this.state.selectedFile.name;
         const formData = new FormData();
         formData.append('file', this.state.selectedFile);
         formData.append('channelId', this.channel.current.value);
         formData.append('vendorId', window.$vendorId);
 
-        console.log("window.vendorid")
-
-        console.log(window.$vendorId)
+        this.setState({upLoading:true})
+        this.setState({progressVisible:""})
+        setTimeout(this.addProgressNow,1000)
 
         http.post("/excelUpload", formData).then(res => {
-            console.log(res.data)
             this.setState({selectedFile : null})
             this.fileEvent.current.value = null;
+            localStorage.setItem('channelId', this.channel.current.value)
             alert("등록 되었습니다.");
             this.props.history.push('/excel/detail'+fileName);
-            // setInterval(()=>{
-            //     this.props.history.push('/excel/detail'+fileName);
-            //     this.excelLIst()
-            // },1000)
+
         }).catch(err => {
+            this.setState({
+                progressVisible:"none",
+                progressNow:10,
+                upLoading:false
+            });
             console.log(err)
         })
     };
@@ -118,6 +150,7 @@ class ExcelUpload extends React.Component {
 
         http.get("/channels/1").then(res => {
             this.setState({channels:res.data})
+            console.log(this.state)
         }).catch(err => {
             console.log(err)
         })
@@ -134,7 +167,9 @@ class ExcelUpload extends React.Component {
                                         <Form.Control as="select" ref={this.channel}>
                                             {
                                                 this.state.channels.map(function (channel) {
-                                                    return <option  key={channel.salesChannelId} value={channel.salesChannelId}>{channel.salesChannelName}</option>
+                                                    return <option  key={channel.salesChannelId}
+                                                                    value={channel.salesChannelId}
+                                                                    onChange={ event => alert(event)} >{channel.salesChannelName}</option>
                                                 })
                                             }
                                         </Form.Control>
@@ -147,12 +182,27 @@ class ExcelUpload extends React.Component {
                                     <Button onClick={this.existsExcel}>
                                         등록
                                     </Button>
+
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <div style={{height:10}}>
+                                    </div>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <div style={{display:this.state.progressVisible}}>
+                                        <ProgressBar animated now={this.state.progressNow} />
+                                    </div>
                                 </Col>
                             </Row>
                         </Mcard>
                         <Mcard title="등록파일 리스트">
                             <BasicGrid
                                 gridData={this.state.gridData}
+                                channel={this.channel}
                             >
                             </BasicGrid>
                         </Mcard>
