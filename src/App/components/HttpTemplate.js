@@ -41,7 +41,13 @@ const http = {
     }).then((res) => {
       return res;
     }).catch(error => {
-      alert("error: " + error.response.data.message);
+      if(isEmpty(error.response)){
+        alert("error: " + error);
+      }else if(isEmpty(error.response.data)){
+        alert("error: " + error);
+      }else{
+        alert("error: " + error.response.data.message);
+      }
       http.notAuth(error);
       // throw error;
       return error;
@@ -70,5 +76,8 @@ const http = {
     });
   }
 };
+
+const isEmpty = function(value){ if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){ return true }else{ return false } };
+
 
 export default http;
